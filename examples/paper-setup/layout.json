@@ -277,7 +277,20 @@
       "rejected": true
     }
   ],
-  "reference_images": [],
+  "reference_images": [
+    {
+      "component": "SLM",
+      "title": "SLM hologram",
+      "file": "examples/paper-setup/reference-images/slm_hologram.png",
+      "placement": "Separate framed panel near SLM; preserve aspect ratio, keep optics and beams visible; no connector lines."
+    },
+    {
+      "component": "CCD",
+      "title": "Recorded intensity",
+      "file": "examples/paper-setup/reference-images/ccd_intensity.png",
+      "placement": "Separate framed panel near CCD; preserve aspect ratio, keep optics and beams visible; no connector lines."
+    }
+  ],
   "assumptions": [
     "Physical positions reused from the prior authored reconstruction; sketch provides topology, not metric distances.",
     "P is circular pupil; assumed diameter 4 mm. SF assumed diameter 1 mm.",
@@ -288,5 +301,5 @@
     "Schematic positions are a compressed illustrative layout, not physical distances."
   ],
   "orientation_note": "Normals were authored for experimental +Y-front inserts. Inspect each collection local front/output axis before deriving rotations; schematic objects have different conventions.",
-  "image_policy": "No manuscript images bundled. Do not fabricate SLM holograms or detector data."
+  "image_policy": "Include both supplied reference images by default. Pack textures in the Blender file. Do not invent replacement holograms or detector data. See reference-images/README.md for provenance and rights."
 }

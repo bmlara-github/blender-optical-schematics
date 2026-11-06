@@ -14,7 +14,7 @@ The agent writes a new Blender build script from the documented plan and library
 
 The source figure was identified locally as manuscript Figure 6. The drawn labels put L2 nearest SLM and L1 nearest CCD; previous source notes report conflicting prose. Preserve the figure labels unless the user resolves the discrepancy. Focal lengths and physical separations were not supplied. The experimental 4 mm pupil, 1 mm filter and 120 mm optical height are authored assumptions. Schematic scale/spacing is illustrative.
 
-The package does not redistribute the paper PDF or extracted data images. Supply a sketch or lawful paper figure when an actual visual comparison is required. Without one, the agent may reconstruct the explicitly documented topology but must state that it did not check the original drawing. Supplied SLM/CCD images go near their instruments, with provenance and no cable-like connectors.
+The two images in [reference-images/](reference-images/) are included for the default example: the hologram goes beside SLM and the recorded intensity beside CCD. Their existing rights are documented separately; they are not Blender simulation outputs. The full paper PDF is not included. Supply a lawful sketch for an actual comparison with the complete original drawing. Without it, report that no full-sketch visual check was performed. Both panels must remain visible in both camera views, with no cable-like connectors.
 
 ## Outputs
 

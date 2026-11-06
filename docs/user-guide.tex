@@ -11,7 +11,7 @@
 \begin{document}\maketitle
 \includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{../images/paper-example.png}\par
 \medskip
-\textbf{What you will make.} A Blender recreation of the optical setup illustrated in the paper, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with manuscript-data insets omitted. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
+\textbf{What you will make.} A Blender recreation of the optical setup illustrated in the paper, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with the supplied SLM hologram and CCD intensity panels beside their instruments. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
 
 \textbf{What inspired this project.} The basic optical-setup schematic in \url{https://doi.org/10.1103/6ftp-svh8} motivated the development of this Blender library. The paper contains no Blender model. The models and this example were created afterward; they were neither used in nor supplied with that publication. The paper DOI identifies the article, not this library.
 
@@ -95,8 +95,8 @@ For the first run, use the supplied list and layout without adding files. Paste 
 Read agent/setup-to-blender/SKILL.md and follow it to carry
 out examples/paper-setup/prompt.md. Use this project only.
 Generate the paper-setup example now, not just a plan.
-Use the supplied layout assumptions and no manuscript
-image insets. Save to a new dated Figures folder; preserve
+Use the supplied layout assumptions and both bundled
+SLM/CCD image panels. Save to a new dated Figures folder; preserve
 existing files and libraries. Run Blender, inspect both
 views, and give me links to the Blender file, renders,
 paired SVGs and the validation/assumptions notes.
@@ -129,7 +129,7 @@ Figures/YYYY-MM-DD-FIgNN/
 
 \textbf{What is assumed.} Positions and mounting choices are authored layout assumptions, not measurements. Focal lengths are unknown. The experimental pupil and filter openings are assumed to be 4 mm and 1 mm. Gaussian envelopes are visual guides, not diffraction simulations. Mechanical fit is not certified.
 \section*{8. Add your own sketch or data images later}
-Create \texttt{inputs/paper-setup/} inside the project and place your lawful sketch/PDF and any SLM/CCD reference PNGs there. Tell Codex the exact filenames and which component each image belongs to. Ask for a new figure variant rather than overwriting the first run. The repository does not bundle manuscript images, and the preview in this guide omits them. Without a supplied sketch the agent reconstructs the documented topology and must not claim to have checked the original drawing.
+Create \texttt{inputs/paper-setup/} inside the project and place your lawful sketch/PDF and any SLM/CCD reference PNGs there. Tell Codex the exact filenames and which component each image belongs to. Ask for a new figure variant rather than overwriting the first run. The example includes two PNGs in \path{examples/paper-setup/reference-images/}: \texttt{slm\_hologram.png} beside SLM and \texttt{ccd\_intensity.png} beside CCD. They are supplied reference imagery, not Blender simulation results. Their source and existing rights are recorded in that folder's README. The full paper PDF is not bundled. Without a supplied sketch the agent reconstructs the documented topology and must not claim to have checked the original drawing.
 \clearpage
 \section*{9. If something does not work}
 \begin{description}[leftmargin=0pt,style=nextline]
@@ -140,6 +140,7 @@ Create \texttt{inputs/paper-setup/} inside the project and place your lawful ske
 \item[Python or Pillow is missing.] Ask Codex to identify the missing dependency and use a project-local environment for the exporter. Blender has its own Python for scene builds. The optional installer needs standard Python, but the direct file-path agent call does not need the installer.
 \item[Codex only returns a plan.] Paste: ``Continue and generate the files. Run Blender, export both views and paired SVGs, then inspect and link the results.'' If it cannot execute locally, switch to a local project session or follow its reported installation fix.
 \item[Rendering is slow.] Ask for a separate preview at 1000 by 800 pixels and 12 samples. Once it looks right, request the final 2000 by 1600 images with 40 samples. Do not present the preview as the final render.
+\item[An SLM or CCD panel is missing.] Confirm both bundled reference PNGs exist. Ask the agent to load them, pack the textures and inspect both camera views. Do not substitute invented data.
 \item[Labels, apertures or beams look wrong.] Ask for a corrected variant and state the specific discrepancy. Moving an optic does not automatically reroute its beam; both need updating in the scene plan. Preserve the original result for comparison.
 \end{description}
 \section*{Sources, licenses and editable documentation}

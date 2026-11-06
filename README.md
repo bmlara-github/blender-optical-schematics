@@ -21,7 +21,7 @@ These are visualization assets. Materials and generic optical shapes are illustr
 
 ## License and citation
 
-Original code uses MIT; original authored models and documentation use CC BY 4.0. See [LICENSE](LICENSE). This package contains no manuscript PDFs or extracted manuscript images. See [material provenance](docs/provenance.md).
+Original code uses MIT; original authored models and documentation use CC BY 4.0. See [LICENSE](LICENSE). This package includes two supplied SLM/CCD reference images for the example, with their existing rights documented separately; it does not include the manuscript PDF. See [material provenance](docs/provenance.md).
 
 ## How to cite
 
@@ -37,7 +37,7 @@ From `docs/`, run `pdflatex user-guide.tex` twice. The PDF uses the included exa
 
 ## Generate the paper setup with the agent
 
-Use the included [setup-to-Blender agent](agent/setup-to-blender/SKILL.md) and paste the [clean example request](examples/paper-setup/prompt.md). [Example instructions and inputs](examples/paper-setup/README.md) explain how to generate a later reconstruction of the paper setup. The agent writes and runs the scene builder; it does not require private project files. Manuscript images are optional user-provided inputs.
+Use the included [setup-to-Blender agent](agent/setup-to-blender/SKILL.md) and paste the [clean example request](examples/paper-setup/prompt.md). [Example instructions and inputs](examples/paper-setup/README.md) explain how to generate a later reconstruction of the paper setup. The agent writes and runs the scene builder; it does not require private project files. The SLM hologram and CCD intensity images are included with the example; additional sketches are optional user-provided inputs.
 
 ## First-time setup
 
