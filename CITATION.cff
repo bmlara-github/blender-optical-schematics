@@ -2,14 +2,20 @@ cff-version: 1.2.0
 message: "Please cite the versioned Zenodo release of this project when available."
 type: software
 title: "Blender Optical Schematics"
-version: 0.1.0
+version: 0.1.1
 authors:
   - family-names: "Rodriguez-Lara"
     given-names: "B. M."
     orcid: "https://orcid.org/0000-0002-7014-0450"
-license:
-  - MIT
-  - CC-BY-4.0
+# Software license; asset and documentation licensing is specified below and in LICENSE.
+license: MIT
+abstract: >-
+  Reusable Blender assets for optical schematics, with a setup-to-Blender
+  agent and step-by-step documentation. Original code is licensed under MIT;
+  original models, figures, and documentation are licensed under CC BY 4.0.
+  The example is a later reconstruction of the optical setup described in
+  https://doi.org/10.1103/6ftp-svh8; these Blender models were not used in that paper.
+repository-code: "https://github.com/bmlara-github/blender-optical-schematics"
 keywords:
   - optics
   - Blender
