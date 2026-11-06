@@ -1,0 +1,292 @@
+{
+  "format": "agent-authoring-plan-v1",
+  "style": "schematic",
+  "manuscript_doi": "10.1103/6ftp-svh8",
+  "relationship": "Later 3D reconstruction of the paper setup. These Blender models were not used in the paper.",
+  "coordinate_units": "schematic Blender units",
+  "meters_per_blender_unit": 0.01,
+  "optical_height": 1.6,
+  "optical_sequence": [
+    "Laser",
+    "P",
+    "L1P",
+    "L2P",
+    "SLM",
+    "L2",
+    "SF",
+    "L1",
+    "CCD"
+  ],
+  "components": [
+    {
+      "label": "Laser",
+      "collection": "SO_Laser",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        -10.98,
+        10.935
+      ],
+      "experimental_normal_xy_reference": [
+        0.800000011920929,
+        -0.6000000238418579
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "P",
+      "collection": "SO_Figure_Circular_Pupil",
+      "library": "library/Bllas_Schematic_Optics_Additions_v02.blend",
+      "position_xy": [
+        -9.72,
+        9.99
+      ],
+      "experimental_normal_xy_reference": [
+        0.800000011920929,
+        -0.6000000238418579
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "L1P",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        -4.860001,
+        6.345
+      ],
+      "experimental_normal_xy_reference": [
+        0.800000011920929,
+        -0.6000000238418579
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "L2P",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        5.4,
+        -1.35
+      ],
+      "experimental_normal_xy_reference": [
+        0.800000011920929,
+        -0.6000000238418579
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "L2",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        2.7,
+        -5.4
+      ],
+      "experimental_normal_xy_reference": [
+        -1.0,
+        0.0
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "L1",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        -9.45,
+        -5.625
+      ],
+      "experimental_normal_xy_reference": [
+        -1.0,
+        0.0
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "SLM",
+      "collection": "SO_SLM",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        10.8,
+        -5.4
+      ],
+      "experimental_normal_xy_reference": [
+        -0.9486833810806274,
+        0.3162277936935425
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "SF",
+      "collection": "SO_Spatial_Filter_Mask",
+      "library": "library/Bllas_Schematic_Optics_Additions_v02.blend",
+      "position_xy": [
+        -4.05,
+        -5.625
+      ],
+      "experimental_normal_xy_reference": [
+        -1.0,
+        0.0
+      ],
+      "focal_length_mm": null
+    },
+    {
+      "label": "CCD",
+      "collection": "SO_CCD_Camera",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "position_xy": [
+        -14.4,
+        -5.625
+      ],
+      "experimental_normal_xy_reference": [
+        1.0,
+        0.0
+      ],
+      "focal_length_mm": null
+    }
+  ],
+  "beams": [
+    {
+      "name": "Input",
+      "points_xy": [
+        [
+          -10.98,
+          10.935
+        ],
+        [
+          -9.72,
+          9.99
+        ],
+        [
+          -4.860001,
+          6.345
+        ]
+      ],
+      "visualization_radii": [
+        0.054,
+        0.054,
+        0.054
+      ],
+      "rejected": false
+    },
+    {
+      "name": "Input relay",
+      "points_xy": [
+        [
+          -4.860001,
+          6.345
+        ],
+        [
+          0.269999,
+          2.4975
+        ],
+        [
+          5.4,
+          -1.35
+        ],
+        [
+          10.8,
+          -5.4
+        ]
+      ],
+      "visualization_radii": [
+        0.054,
+        0.01125,
+        0.054,
+        0.054
+      ],
+      "rejected": false
+    },
+    {
+      "name": "Selected +1",
+      "points_xy": [
+        [
+          10.8,
+          -5.4
+        ],
+        [
+          2.7,
+          -5.4
+        ],
+        [
+          -4.05,
+          -5.625
+        ],
+        [
+          -9.45,
+          -5.625
+        ],
+        [
+          -14.4,
+          -5.625
+        ]
+      ],
+      "visualization_radii": [
+        0.054,
+        0.135,
+        0.009,
+        0.135,
+        0.0675
+      ],
+      "rejected": false
+    },
+    {
+      "name": "Rejected 0",
+      "points_xy": [
+        [
+          10.8,
+          -5.4
+        ],
+        [
+          2.7,
+          -5.29875
+        ],
+        [
+          -4.05,
+          -5.4
+        ]
+      ],
+      "visualization_radii": [
+        0.045,
+        0.09,
+        0.009
+      ],
+      "rejected": true
+    },
+    {
+      "name": "Rejected -1",
+      "points_xy": [
+        [
+          10.8,
+          -5.4
+        ],
+        [
+          2.7,
+          -5.1975
+        ],
+        [
+          -4.05,
+          -5.175
+        ]
+      ],
+      "visualization_radii": [
+        0.045,
+        0.09,
+        0.009
+      ],
+      "rejected": true
+    }
+  ],
+  "reference_images": [],
+  "assumptions": [
+    "Physical positions reused from the prior authored reconstruction; sketch provides topology, not metric distances.",
+    "P is circular pupil; assumed diameter 4 mm. SF assumed diameter 1 mm.",
+    "Focal lengths unspecified; generic biconvex lenses are visualization assets.",
+    "Optical height 120 mm and mounting poses are assumptions, not mechanically certified.",
+    "PDF labels retained: L2 near SLM and L1 near CCD; previous notes report conflicting manuscript prose.",
+    "Gaussian envelopes and bright cores are not diffraction simulations or measured beam diameters.",
+    "Schematic positions are a compressed illustrative layout, not physical distances."
+  ],
+  "orientation_note": "Normals were authored for experimental +Y-front inserts. Inspect each collection local front/output axis before deriving rotations; schematic objects have different conventions.",
+  "image_policy": "No manuscript images bundled. Do not fabricate SLM holograms or detector data."
+}

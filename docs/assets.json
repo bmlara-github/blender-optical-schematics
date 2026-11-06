@@ -1,0 +1,137 @@
+{
+  "asset_count": 22,
+  "assets": [
+    {
+      "index": 1,
+      "collection": "SO_Biconcave",
+      "library": "Bllas_Schematic_Optics_Additions_v03.blend",
+      "description": "Generic biconcave lens with readable schematic curvature; no assigned focal length."
+    },
+    {
+      "index": 2,
+      "collection": "SO_Biconvex",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Smooth rotational lens with readable edge thickness; illustrative curvature, not a specified focal length."
+    },
+    {
+      "index": 3,
+      "collection": "SO_CCD_Camera",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Box camera with a recessed sensor behind an open input collar."
+    },
+    {
+      "index": 4,
+      "collection": "SO_Cube_Beamsplitter",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Glass cube with an explicit diagonal splitting plane. Coating appearance is illustrative."
+    },
+    {
+      "index": 5,
+      "collection": "SO_Figure_Circular_Pupil",
+      "library": "Bllas_Schematic_Optics_Additions_v02.blend",
+      "description": "Circular pupil, 12.8 mm illustrative opening, axis Y."
+    },
+    {
+      "index": 6,
+      "collection": "SO_Gaussian_Beam",
+      "library": "Bllas_Schematic_Optics_Additions_v02.blend",
+      "description": "Three-dimensional Gaussian volume, exp(-2r\u00b2/w\u00b2), straight 40 mm illustrative segment. Procedural builder supports varying width and paths."
+    },
+    {
+      "index": 7,
+      "collection": "SO_Iris",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Open annular iris with stylized overlapping blades; opening is a true geometric hole."
+    },
+    {
+      "index": 8,
+      "collection": "SO_Laser",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Simplified laser housing with a centered output port and optional indicator."
+    },
+    {
+      "index": 9,
+      "collection": "SO_Meniscus",
+      "library": "Bllas_Schematic_Optics_Additions_v03.blend",
+      "description": "Generic meniscus lens with readable schematic curvature; no assigned focal length."
+    },
+    {
+      "index": 10,
+      "collection": "SO_Mirror",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Silver front face with a separate dark backing and polished edge."
+    },
+    {
+      "index": 11,
+      "collection": "SO_Objective",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Simplified stepped barrel and front optic; illustrative proportions."
+    },
+    {
+      "index": 12,
+      "collection": "SO_Photodetector",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Compact detector housing with a visible recessed receiving area."
+    },
+    {
+      "index": 13,
+      "collection": "SO_Pinhole",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Thin metal plate with a real central hole, enlarged for schematic readability."
+    },
+    {
+      "index": 14,
+      "collection": "SO_Plano_Concave",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Smooth rotational lens with readable edge thickness; illustrative curvature, not a specified focal length."
+    },
+    {
+      "index": 15,
+      "collection": "SO_Plano_Convex",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Smooth rotational lens with readable edge thickness; illustrative curvature, not a specified focal length."
+    },
+    {
+      "index": 16,
+      "collection": "SO_Plate_Beamsplitter",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Thin circular substrate with a slightly cyan front coating."
+    },
+    {
+      "index": 17,
+      "collection": "SO_Prism",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Triangular glass prism with a right-angle cross section."
+    },
+    {
+      "index": 18,
+      "collection": "SO_Rectangular_Plane_Mirror",
+      "library": "Bllas_Schematic_Optics_Additions_v03.blend",
+      "description": "Rectangular planar front-surface mirror with dark backing."
+    },
+    {
+      "index": 19,
+      "collection": "SO_SLM",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Reflective SLM with a distinct silicon active rectangle and sparse illustrative pixel grid."
+    },
+    {
+      "index": 20,
+      "collection": "SO_Slit",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Two metal jaws separated by an actual open slit."
+    },
+    {
+      "index": 21,
+      "collection": "SO_Spatial_Filter_Mask",
+      "library": "Bllas_Schematic_Optics_Additions_v02.blend",
+      "description": "Spatial-filter mask with a true rectangular opening and asymmetric rejecting blade. Origin at the clear aperture."
+    },
+    {
+      "index": 22,
+      "collection": "SO_Waveplate",
+      "library": "Bllas_Schematic_Optics_v01.blend",
+      "description": "Violet plate with an orientation tick; color identifies function rather than a measured spectrum."
+    }
+  ]
+}

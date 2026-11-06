@@ -1,0 +1,4 @@
+# Blender Asset Catalog Definition File
+VERSION 1
+
+31853180-7fbc-4aa8-87fb-d36618104c82:Schematic Optics:Schematic Optics

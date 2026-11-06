@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite the versioned Zenodo release of this project when available."
+type: software
+title: "Blender Optical Schematics"
+version: 0.1.0
+authors:
+  - family-names: "Rodriguez-Lara"
+    given-names: "B. M."
+    orcid: "https://orcid.org/0000-0002-7014-0450"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - optics
+  - Blender
+  - scientific visualization
