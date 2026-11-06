@@ -1,5 +1,5 @@
 {
-  "asset_count": 22,
+  "asset_count": 23,
   "assets": [
     {
       "index": 1,
@@ -132,6 +132,12 @@
       "collection": "SO_Waveplate",
       "library": "Bllas_Schematic_Optics_v01.blend",
       "description": "Violet plate with an orientation tick; color identifies function rather than a measured spectrum."
+    },
+    {
+      "index": 23,
+      "collection": "SO_Collimator",
+      "library": "Bllas_Schematic_Optics_Additions_v04.blend",
+      "description": "Generic mounted positive-lens collimator with graphite barrel, metal collars and recessed glass. Output along local -Y; focal length is scene-defined."
     }
   ]
 }

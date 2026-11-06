@@ -1,0 +1,22 @@
+{
+  "asset": "SO_Collimator",
+  "library_file": "Bllas_Schematic_Optics_Additions_v04.blend",
+  "units": "1 BU = 10 mm",
+  "origin": "Output aperture center",
+  "output_axis": "-Y",
+  "focal_length": "scene-defined",
+  "materials": [
+    "Accent \u2022 teal",
+    "Aluminum \u2022 satin",
+    "Collimated output \u2022 Gaussian volume",
+    "Glass \u2022 neutral blue",
+    "Ground \u2022 pale",
+    "Housing \u2022 graphite"
+  ],
+  "checks": {
+    "asset_marked": true,
+    "no_lettering": true,
+    "no_arrows": true,
+    "lens_present": true
+  }
+}
