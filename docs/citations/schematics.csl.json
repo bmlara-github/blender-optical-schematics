@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rodriguez_lara_2026_optical_schematics",
+    "type": "software",
+    "title": "Blender Optical Schematics",
+    "author": [
+      {
+        "family": "Rodriguez-Lara",
+        "given": "B. M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2026,
+          11,
+          6
+        ]
+      ]
+    },
+    "version": "v0.1.1",
+    "publisher": "Zenodo",
+    "DOI": "10.5281/zenodo.23993948",
+    "URL": "https://doi.org/10.5281/zenodo.23993948"
+  }
+]

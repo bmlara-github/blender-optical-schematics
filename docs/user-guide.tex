@@ -9,7 +9,8 @@
 \title{Blender Optical Schematics\\\large From a fresh download to your first figure}
 \author{B. M. Rodriguez-Lara}\date{5 November 2026}
 \begin{document}\maketitle
-\includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{../images/paper-example.png}
+\includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{../images/paper-example.png}\par
+\medskip
 \textbf{What you will make.} A schematic reconstruction of the paper's optical setup, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with manuscript-data insets omitted. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
 
 \textbf{Scientific reference.} \url{https://doi.org/10.1103/6ftp-svh8}. These working Blender models were developed after the paper; they were not used in it. The paper DOI is not a DOI for this library.
@@ -144,7 +145,41 @@ Create \texttt{inputs/paper-setup/} inside the project and place your lawful ske
 \section*{Sources, licenses and editable documentation}
 The agent installation convention is documented at \url{https://developers.openai.com/codex/skills/}. Blender's library preferences are documented at \url{https://docs.blender.org/manual/en/5.4/editors/preferences/asset_libraries.html}. Menu placement varies by version.
 
-Original code uses MIT; original authored models and documentation use CC BY 4.0. See LICENSE and \texttt{docs/provenance.md} for exclusions.  No library DOI has yet been assigned.
+Original code uses MIT; original authored models and documentation use CC BY 4.0. See LICENSE and \texttt{docs/provenance.md} for exclusions. See the following section for the library DOI and citation formats.
 
 This guide's editable source is \texttt{docs/user-guide.tex}. To rebuild it, run \texttt{pdflatex user-guide.tex} twice from \texttt{docs/}. The example image is \texttt{images/paper-example.png}. The full catalogue is separate; there is no collection index in this guide.
+
+\clearpage
+\section*{10. How to cite}
+When using this library to prepare a figure, cite the archived release you used. For version v0.1.1, use:
+
+Rodriguez-Lara, B. M. (2026). \textit{Blender Optical Schematics} (Version v0.1.1) [Computer software]. Zenodo.\newline
+\url{https://doi.org/10.5281/zenodo.23993948}
+
+\textbf{Which DOI?} The DOI above identifies the fixed v0.1.1 release, published on 6 November 2026. Prefer it when documenting reproducible work. The all-versions DOI, \url{https://doi.org/10.5281/zenodo.23993947}, identifies the project across releases; use it for a general reference to the library. For a future release, use that release's own citation metadata rather than retaining the v0.1.1 DOI.
+
+\subsection*{BibTeX for LaTeX}
+Copy this entry into your bibliography \texttt{.bib} file, or use the supplied \path{docs/citations/schematics.bib}. The \texttt{@misc} entry works with traditional BibTeX styles; version information is included in the note.
+\begin{Verbatim}[fontsize=\small]
+@misc{rodriguez_lara_2026_optical_schematics,
+  author    = {Rodriguez-Lara, B. M.},
+  title     = {{Blender Optical Schematics}},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23993948},
+  url       = {https://doi.org/10.5281/zenodo.23993948},
+  note      = {Version v0.1.1. Computer software}
+}
+\end{Verbatim}
+In your manuscript, use \verb|\cite{rodriguez_lara_2026_optical_schematics}| and compile with your normal bibliography workflow.
+
+\subsection*{Other formats and reference managers}
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+\item \textbf{RIS:} import \path{docs/citations/schematics.ris} into a reference manager such as Zotero or EndNote.
+\item \textbf{CSL-JSON:} use \path{docs/citations/schematics.csl.json} with tools supporting Citation Style Language data.
+\item \textbf{Plain text:} copy \path{docs/citations/schematics.txt} and adapt the formatting to your journal's style.
+\item \textbf{CFF:} \path{CITATION.cff} in the project root provides machine-readable citation metadata for GitHub and other tools.
+\end{itemize}
+\textbf{Keep the scientific reference separate.} Cite the paper at \url{https://doi.org/10.1103/6ftp-svh8} when discussing its scientific setup or results. These Blender models are a later reconstruction and were not used in that publication. Library citation does not replace the attribution required by CC BY 4.0 for reused models, figures and documentation.
+
 \end{document}
