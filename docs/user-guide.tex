@@ -152,34 +152,33 @@ This guide's editable source is \texttt{docs/user-guide.tex}. To rebuild it, run
 
 \clearpage
 \section*{10. How to cite}
-When using this library to prepare a figure, cite the archived release you used. For version v0.1.2, use:
+When using this library to prepare a figure, cite the project using its stable DOI:
 
-Rodriguez-Lara, B. M. (2026). \textit{Blender Optical Schematics} (Version v0.1.2) [Computer software]. Zenodo.\newline
-\url{https://doi.org/10.5281/zenodo.23994376}
+Rodriguez-Lara, B. M. (2026). \textit{Blender Optical Schematics} [Computer software]. Zenodo.\newline
+\url{https://doi.org/10.5281/zenodo.23993947}
 
-\textbf{Which DOI?} The DOI above identifies the fixed v0.1.2 release, published on 6 November 2026. Prefer it when documenting reproducible work. The all-versions DOI, \url{https://doi.org/10.5281/zenodo.23993947}, identifies the project across releases; use it for a general reference to the library. For a future release, use that release's own citation metadata rather than retaining the v0.1.2 DOI.
+\textbf{Stable project DOI.} This DOI identifies Blender Optical Schematics across all releases and opens the latest archived version. It remains the same as the library develops.
 
 \subsection*{BibTeX for LaTeX}
-Copy this entry into your bibliography \texttt{.bib} file, or use the supplied \path{docs/citations/schematics.bib}. The \texttt{@misc} entry works with traditional BibTeX styles; version information is included in the note.
+Copy this entry into your bibliography \texttt{.bib} file, or use the supplied \path{docs/citations/schematics-project.bib}. The \texttt{@misc} entry works with traditional BibTeX styles; the note identifies the work as computer software.
 \begin{Verbatim}[fontsize=\small]
 @misc{rodriguez_lara_2026_optical_schematics,
   author    = {Rodriguez-Lara, B. M.},
   title     = {{Blender Optical Schematics}},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.23994376},
-  url       = {https://doi.org/10.5281/zenodo.23994376},
-  note      = {Version v0.1.2. Computer software}
+  doi       = {10.5281/zenodo.23993947},
+  url       = {https://doi.org/10.5281/zenodo.23993947},
+  note      = {Computer software}
 }
 \end{Verbatim}
 In your manuscript, use \verb|\cite{rodriguez_lara_2026_optical_schematics}| and compile with your normal bibliography workflow.
 
 \subsection*{Other formats and reference managers}
 \begin{itemize}[leftmargin=*,itemsep=3pt]
-\item \textbf{RIS:} import \path{docs/citations/schematics.ris} into a reference manager such as Zotero or EndNote.
-\item \textbf{CSL-JSON:} use \path{docs/citations/schematics.csl.json} with tools supporting Citation Style Language data.
-\item \textbf{Plain text:} copy \path{docs/citations/schematics.txt} and adapt the formatting to your journal's style.
-\item \textbf{CFF:} \path{CITATION.cff} in the project root provides machine-readable citation metadata for GitHub and other tools.
+\item \textbf{RIS:} import \path{docs/citations/schematics-project.ris} into a reference manager such as Zotero or EndNote.
+\item \textbf{CSL-JSON:} use \path{docs/citations/schematics-project.csl.json} with tools supporting Citation Style Language data.
+\item \textbf{Plain text:} copy \path{docs/citations/schematics-project.txt} and adapt the formatting to your journal's style.
 \end{itemize}
 \textbf{Cite the library for the Blender assets.} Use the library DOI above when using these models. Cite the paper at \url{https://doi.org/10.1103/6ftp-svh8} only when referring to its optical setup or scientific results. Its basic schematic inspired this project; the article contains no Blender model. The models were created afterward and were neither used in nor supplied with the publication. Library citation does not replace the attribution required by CC BY 4.0 for reused models, figures and documentation.
 
