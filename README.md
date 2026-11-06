@@ -25,9 +25,9 @@ Original code uses MIT; original authored models and documentation use CC BY 4.0
 
 ## How to cite
 
-Rodriguez-Lara, B. M. (2026). Blender Optical Schematics (Version v0.1.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23993948
+Rodriguez-Lara, B. M. (2026). Blender Optical Schematics (Version v0.1.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23994376
 
-Cite the version you used. The [v0.1.1 DOI](https://doi.org/10.5281/zenodo.23993948) identifies a fixed release; the [all-versions DOI](https://doi.org/10.5281/zenodo.23993947) identifies the project across releases.
+Cite the version you used. The [v0.1.2 DOI](https://doi.org/10.5281/zenodo.23994376) identifies a fixed release; the [all-versions DOI](https://doi.org/10.5281/zenodo.23993947) identifies the project across releases.
 
 Download [BibTeX](docs/citations/schematics.bib), [RIS](docs/citations/schematics.ris), [CSL-JSON](docs/citations/schematics.csl.json), or [plain text](docs/citations/schematics.txt). See the user guide's “How to cite” section. The library citation is separate from the scientific paper.
 

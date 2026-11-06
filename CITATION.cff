@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "Please cite the archived release used for your work; the citation below describes v0.1.1."
+message: "Please cite the archived release used for your work; the citation below describes v0.1.2."
 type: software
 title: "Blender Optical Schematics"
-version: 0.1.1
+version: 0.1.2
 authors:
   - family-names: "Rodriguez-Lara"
     given-names: "B. M."
@@ -20,5 +20,5 @@ keywords:
   - optics
   - Blender
   - scientific visualization
-doi: "10.5281/zenodo.23993948"
+doi: "10.5281/zenodo.23994376"
 date-released: "2026-11-06"
