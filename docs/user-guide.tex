@@ -11,9 +11,9 @@
 \begin{document}\maketitle
 \includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{../images/paper-example.png}\par
 \medskip
-\textbf{What you will make.} A schematic reconstruction of the paper's optical setup, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with manuscript-data insets omitted. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
+\textbf{What you will make.} A Blender recreation of the optical setup illustrated in the paper, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with manuscript-data insets omitted. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
 
-\textbf{Scientific reference.} \url{https://doi.org/10.1103/6ftp-svh8}. These working Blender models were developed after the paper; they were not used in it. The paper DOI is not a DOI for this library.
+\textbf{What inspired this project.} The basic optical-setup schematic in \url{https://doi.org/10.1103/6ftp-svh8} motivated the development of this Blender library. The paper contains no Blender model. The models and this example were created afterward; they were neither used in nor supplied with that publication. The paper DOI identifies the article, not this library.
 
 No Blender coding experience is assumed. Follow the steps in order. The catalogue image is available separately at \path{images/catalogue-cover.png}.
 \clearpage
@@ -89,7 +89,7 @@ The installer uses only standard Python. If Python is unavailable, the manual al
 blender-optical-schematics/.agents/skills/setup-to-blender/SKILL.md
 \end{Verbatim}
 The dot-prefixed \texttt{.agents} folder is normally hidden. Keep the visible \texttt{agent/} folder as the original distribution. After optional installation, start a new chat in the same project. If the named skill is still not recognized, use the direct call below; it does not depend on skill discovery.
-\section*{6. Generate the paper example}
+\section*{6. Generate the example inspired by the paper}
 For the first run, use the supplied list and layout without adding files. Paste this exact request in the project chat:
 \begin{Verbatim}[fontsize=\small]
 Read agent/setup-to-blender/SKILL.md and follow it to carry
@@ -180,6 +180,6 @@ In your manuscript, use \verb|\cite{rodriguez_lara_2026_optical_schematics}| and
 \item \textbf{Plain text:} copy \path{docs/citations/schematics.txt} and adapt the formatting to your journal's style.
 \item \textbf{CFF:} \path{CITATION.cff} in the project root provides machine-readable citation metadata for GitHub and other tools.
 \end{itemize}
-\textbf{Keep the scientific reference separate.} Cite the paper at \url{https://doi.org/10.1103/6ftp-svh8} when discussing its scientific setup or results. These Blender models are a later reconstruction and were not used in that publication. Library citation does not replace the attribution required by CC BY 4.0 for reused models, figures and documentation.
+\textbf{Cite the library for the Blender assets.} Use the library DOI above when using these models. Cite the paper at \url{https://doi.org/10.1103/6ftp-svh8} only when referring to its optical setup or scientific results. Its basic schematic inspired this project; the article contains no Blender model. The models were created afterward and were neither used in nor supplied with the publication. Library citation does not replace the attribution required by CC BY 4.0 for reused models, figures and documentation.
 
 \end{document}
