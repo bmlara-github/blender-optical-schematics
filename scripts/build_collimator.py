@@ -21,7 +21,7 @@ for i in range(4): ring('Focus collar groove',.56+i*.1,.874,.85,.025,'Aluminum â
 a['optical_axis']='Y'; a['output_direction']='-Y'; a['origin']='Output aperture center'; a['parameters']=json.dumps({'type':'generic mounted positive-lens collimator','focal_length':'scene-defined','geometry':'illustrative','output_aperture_diameter_BU':1.3})
 a['input_port_local']=[0,2.265,0]; a['output_port_local']=[0,-.08,0]
 a.asset_data.tags.new('Collimator')
-fig=ROOT/'Figures/2026-11-06-FIg01'; (fig/'renders').mkdir(parents=True,exist_ok=True); (fig/'svg').mkdir(exist_ok=True)
+fig=ROOT/'Figures/2026-11-06-Fig01'; (fig/'renders').mkdir(parents=True,exist_ok=True); (fig/'svg').mkdir(exist_ok=True)
 s=ns['scene']('Collimator â€¢ schematic preview'); s.render.resolution_x=1800;s.render.resolution_y=1200
 s.cycles.samples=48
 ns['instance']('Collimator',(0,1,1.2))

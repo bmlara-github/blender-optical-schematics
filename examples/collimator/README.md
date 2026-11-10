@@ -10,4 +10,4 @@ Append `SO_Collimator` from [the v0.4 asset file](../../library/Bllas_Schematic_
 
 Both SVGs embed the raster rendering. Lettering is editable vector text.
 
-To rebuild, run Blender in background mode with `--python scripts/build_collimator.py` from this repository. The builder uses the included `collimator_primitives.py` and `gaussian_beam.py`; no private workspace files are needed. It regenerates the v0.4 library and writes the dated preview to `Figures/2026-11-06-FIg01/`. Preserve manual edits before rebuilding.
+To rebuild, run Blender in background mode with `--python scripts/build_collimator.py` from this repository. The builder uses the included `collimator_primitives.py` and `gaussian_beam.py`; no private workspace files are needed. It regenerates the v0.4 library and writes the dated preview to `Figures/2026-11-06-Fig01/`. Preserve manual edits before rebuilding.
