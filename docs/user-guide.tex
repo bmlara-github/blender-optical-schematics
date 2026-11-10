@@ -239,33 +239,84 @@ Read that JSON's azimuth and elevation before choosing it. Save a separate Blend
 
 \par\textbf{Readability check.} This alternative shows the back of the SLM. Keep the fixed view when the active face must be visible. This is a demonstration of applying a candidate, not a claim of an optimal view.
 \clearpage
+\section*{11a. Restore the beams and illuminate the chosen view}
+Choose and save the camera first. Keep that camera and the component positions fixed while finishing the appearance. The preceding samplers compare composition; their solid beam override is not the final beam style.
+
+\textbf{Apply the finishing step.} In the same Blender console, after Step 11:
+\begin{Verbatim}[fontsize=\small]
+workflow.finish('compact', OUT, samples=64)
+\end{Verbatim}
+This opens the saved compact scene, restores the translucent beam envelope and thin shaded red core used in the local tests, and places three area lights relative to the selected camera. It saves a separate \path{finished/compact.blend}, lighting report and \path{finished/renders/compact.png}. The original camera study remains available. Run \texttt{workflow.finish('fixed', OUT)} to finish the fixed view too.
+
+\textbf{Position lights in the camera frame.} Camera-right is $+x$, camera-up is $+y$, and toward the camera is $+z$. Each light points at the setup target $(-3,0,1.6)$. These are schematic Blender units, not physical experiment dimensions.
+\begin{center}
+\begin{tabular}{lrrrll}
+Light & $x$ & $y$ & $z$ & Power & Size\\\hline
+Key & $-12$ & 14 & 18 & 3300 W & 11\\
+Fill & 14 & 5 & 12 & 1100 W & 12\\
+Rim & 4 & 12 & $-10$ & 2200 W & 8
+\end{tabular}
+\end{center}
+The large upper-left key creates different brightness on adjacent housing faces. The weaker right fill keeps dark faces readable without flattening them. The rear rim supplies lens-edge and housing-edge highlights. World strength 0.25 supplies restrained ambient illumination. Existing scene lights are muted to avoid doubling illumination. The three named rig lights are reused when called again.
+
+\textbf{Tune and preview.} For adjustments on the currently open finished scene, call the helper directly; do not rerun the workflow wrapper over an existing finished file.
+\begin{Verbatim}[fontsize=\small]
+from finish_scene import finish_scene
+scene = bpy.context.scene
+finish_scene(scene, target=(-3,0,1.6),
+    key_power=3300, fill_power=1100,
+    rim_power=2200, world_strength=.25)
+scene.cycles.samples = 16
+scene.render.filepath = str(ROOT/OUT/'lighting-preview.png')
+bpy.ops.render.render(write_still=True)
+\end{Verbatim}
+If the image looks flat, reduce fill or ambient strength before increasing the key. If dark housing faces disappear, raise the fill modestly. If lens highlights obscure the beam, lower the rim power or move its light sideways. For a position adjustment, edit the camera-frame offsets in \path{scripts/finish_scene.py}; rerun the helper. If the camera changes, rerun the helper and the panel-placement callback.
+
+\clearpage
+\section*{11b. Inspect and save the final appearance}
+\begin{center}
+\includegraphics[width=\linewidth]{../images/camera-walkthrough/compact-finished.png}
+\end{center}
+\textbf{Finished compact view of the same original example.} Lens highlights, shaded housings and translucent red envelopes restore depth. The core remains readable on white. The SLM's back is still visible in this direction; lighting does not correct a poor viewing direction.
+
+\begin{center}
+\includegraphics[width=115mm]{../images/camera-walkthrough/fixed-finished.png}
+\end{center}
+\textbf{The same finishing recipe on the fixed camera.} Light positions follow this camera's axes. The active SLM face is visible here.
+
+\textbf{Beam settings.} Selected and rejected envelopes share red $(1,.008,.003)$, with emission strengths 0.7 and 0.336 and transparent/emission mix factors 0.21 and 0.14. Thin shaded cores use emission strength 0.2. Their radius is capped at 80 percent of the narrowest local envelope radius. Rejected orders are dimmer red. These are illustrative envelopes, not simulated diffraction or measurements.
+
+\textbf{Final checks.} View the transparent PNG on white. Confirm separate beam branches, visible apertures, gentle lens highlights, shaded housing faces and readable image panels. Use AgX, denoising and 64 samples for the supplied final renders; increase samples if a close inspection shows noise. After manual tuning, set samples back to 64, set the render path back to \path{finished/renders/compact.png}, save \path{finished/compact.blend}, and render again. Then export the finished render in Step 12.
+
+\clearpage
 \section*{12. Export and inspect both SVG pairs}
 Run these commands in a terminal at the project root, outside Blender:
 \begin{Verbatim}[fontsize=\small]
-python examples/paper-setup/export.py Figures/2026-11-10-FIg01 fixed
-python examples/paper-setup/export.py Figures/2026-11-10-FIg01 compact
+python examples/paper-setup/export.py \
+  Figures/2026-11-10-FIg01/finished fixed
+python examples/paper-setup/export.py \
+  Figures/2026-11-10-FIg01/finished compact
 \end{Verbatim}
 The function \texttt{export(output, stage, width\_mm=86, border\_mm=.5)} crops the transparent PNG to its content, preserves its aspect ratio and places it 0.5 mm from every page edge. It produces:
 \begin{Verbatim}[fontsize=\small]
 Figures/2026-11-10-FIg01/
-  fixed.blend                 Fixed POV, packed data images
-  compact.blend               Selected POV, same setup
-  fixed-camera.json           Exact framing and rotation
-  compact-camera.json
-  fixed-panels.json           Panel-alignment checks
-  compact-panels.json
-  fixed-anchors.json          Component screen coordinates
-  compact-anchors.json
-  coarse/                     Nine PNG/JSON pairs and ranking
-  refine/                     Six PNG/JSON pairs and ranking
-  renders/                    Clean and cropped PNGs
-  svg/
-    fixed_lettered.svg        Editable labels
-    fixed_unlettered.svg
-    compact_lettered.svg      Editable labels
-    compact_unlettered.svg
-  fixed-export.json           Page dimensions and borders
-  compact-export.json
+  fixed.blend                 Original camera study
+  compact.blend
+  coarse/                     Nine candidates and ranking
+  refine/                     Six candidates and ranking
+  finished/
+    fixed.blend               Finished illumination and beams
+    compact.blend
+    fixed-lighting.json        Lighting recipe
+    compact-lighting.json
+    renders/                  Final PNGs and cropped PNGs
+    svg/
+      fixed_lettered.svg      Editable labels over raster
+      fixed_unlettered.svg
+      compact_lettered.svg
+      compact_unlettered.svg
+    fixed-export.json         Page dimensions and borders
+    compact-export.json
 \end{Verbatim}
 \begin{enumerate}
 \item Open the lettered SVG in a vector editor. Check that every label names the correct component and that none collides with an optic or panel.
@@ -281,7 +332,7 @@ The bundled scene uses collection instances from the schematic library. Select a
 
 \textbf{Reference-image replacement.} To try your own data while keeping this example, copy \texttt{examples/paper-setup/} to a separate project copy, replace \path{reference-images/slm_hologram.png} and \texttt{ccd\_intensity.png}, and run the workflow into a new output folder. \texttt{load\_example()} reloads these files and packs them; \texttt{update\_reference\_panels()} updates alignment. Do not invent missing data images.
 
-\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. For this camera walkthrough, its visible beam paths use the reusable quadratic surface-envelope helper with an emission override for readability on a transparent publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
+\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. The camera-search previews use a surface-envelope override. Steps 11a--11b restore the approved translucent envelope and shaded core for the final publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
 
 The functions used for these two representations are:
 \begin{Verbatim}[fontsize=\small]
@@ -309,6 +360,7 @@ This optional style exercise still uses the same optical setup. Translation acce
 \item[\texttt{workflow.update\_reference\_panels(scene, camera)}] Calls \texttt{housing\_corner}, \texttt{silhouette\_edge} and \texttt{place\_panel} for both original panels; see Step 8.
 \item[\texttt{render\_camera\_candidates(scene, directory, ...)}] Renders an angle grid with the panel callback, saves each camera JSON and restores the scene; see Step 9.
 \item[\texttt{measure(image)} and \texttt{rank(directory)}] Measure alpha bounds/coverage and publication footprint, flag invalid previews, and build a ranked comparison; see Step 10. These use ordinary Python with Pillow, not Blender Python.
+\item[\texttt{finish\_scene(scene, ...)}] Restores beam appearance and positions the studio lights relative to the chosen camera; see Steps 11a--11b.
 \item[\texttt{export(output, stage, ...)}] Writes the fixed or compact SVG pair and dimension report; see Step 12.
 \item[\texttt{create\_envelope} / \texttt{create\_gaussian\_segment}] Create illustrative beam geometry in a collection; see Step 13.
 \end{description}

@@ -1,0 +1,16 @@
+{
+  "name": "Translucent red envelope with shaded core",
+  "source": "2026-11-10 local schematic refinement",
+  "implementation": "beam_envelope.py",
+  "functions": [
+    "create_envelope",
+    "create_beam_core"
+  ],
+  "emission_selected": 0.7,
+  "emission_rejected": 0.336,
+  "mix_selected": 0.21,
+  "mix_rejected": 0.14,
+  "core_emission": 0.2,
+  "core_radius_limit": "80 percent of minimum envelope radius",
+  "interpretation": "illustrative, not simulated diffraction"
+}

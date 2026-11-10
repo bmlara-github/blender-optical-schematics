@@ -83,6 +83,26 @@ def run(stage,output):
     bpy.ops.render.render(write_still=True)
     return str(out)
 
+def finish(stage, output, samples=64, **lighting):
+    """Finish an existing selected view; save separately under finished/."""
+    from finish_scene import finish_scene
+    if stage not in ['fixed','compact']:raise ValueError('Choose fixed or compact')
+    out=Path(output)
+    if not out.is_absolute():out=ROOT/out
+    destination=out/'finished'
+    destination.mkdir(exist_ok=True);(destination/'renders').mkdir(exist_ok=True)
+    if (destination/(stage+'.blend')).exists():
+        raise FileExistsError('Preserve the finished scene; choose another output folder')
+    bpy.ops.wm.open_mainfile(filepath=str(out/(stage+'.blend')),load_ui=False)
+    scene=bpy.context.scene
+    report=finish_scene(scene,**lighting)
+    scene.cycles.samples=samples
+    scene.render.filepath=str(destination/'renders'/(stage+'.png'))
+    (destination/(stage+'-lighting.json')).write_text(json.dumps(report,indent=2))
+    bpy.ops.wm.save_as_mainfile(filepath=str(destination/(stage+'.blend')))
+    bpy.ops.render.render(write_still=True)
+    return str(destination)
+
 if __name__=='__main__':
     args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('stage',choices=['fixed','coarse','refine','compact']);p.add_argument('--output',required=True)

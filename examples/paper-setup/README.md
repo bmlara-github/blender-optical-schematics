@@ -45,3 +45,5 @@ The two images in [reference-images/](reference-images/) are included for the de
 ## Outputs
 
 A new dated figure folder containing build.py, setup.json, the Blender scene, two clean renders, paired SVGs with and without editable lettering, and a README/report. SVG optics remain raster, with vector lettering in a separate layer. Gaussian envelopes are display geometry, not simulated diffraction. Mechanical fits are not certified.
+
+After selecting the POV, follow [the finishing steps](../../docs/scene-finishing.md) to restore the translucent beams and position studio illumination relative to the camera.
