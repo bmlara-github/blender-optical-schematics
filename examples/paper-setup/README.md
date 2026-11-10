@@ -16,20 +16,22 @@ from pathlib import Path
 ROOT = Path('/absolute/path/to/blender-optical-schematics')
 sys.path.insert(0, str(ROOT / 'examples/paper-setup'))
 import workflow
-OUT = ROOT / 'Figures/2026-11-10-FIg01'  # use today's date and a new number
+OUT = ROOT / 'Figures/2026-11-10-Fig03'  # use today's date and a new number
 workflow.run('fixed', OUT)
 workflow.run('coarse', OUT)
 workflow.run('refine', OUT)
 workflow.run('compact', OUT)
+workflow.finish('fixed', OUT)
+workflow.finish('compact', OUT, version=4, source_version=3)
 ```
 
 Outside Blender, from the repository root:
 
 ```sh
-python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/coarse
-python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/refine
-python examples/paper-setup/export.py Figures/2026-11-10-FIg01 fixed
-python examples/paper-setup/export.py Figures/2026-11-10-FIg01 compact
+python scripts/rank_camera_views.py Figures/2026-11-10-Fig03/coarse
+python scripts/rank_camera_views.py Figures/2026-11-10-Fig03/refine
+python examples/paper-setup/export.py Figures/2026-11-10-Fig03 fixed --version 4
+python examples/paper-setup/export.py Figures/2026-11-10-Fig03 compact --version 4
 ```
 
 The compact stage demonstrates applying an alternative preset, not an automatic optimum. It shows the back of the SLM; retain the fixed view when visibility of its active face is required. The guide explains this tradeoff. The source uses library surface beam envelopes for visibility on white; hidden original volume envelopes remain in the scene. Neither is a diffraction calculation.
@@ -44,8 +46,8 @@ The two images in [reference-images/](reference-images/) are included for the de
 
 ## Outputs
 
-A new dated figure folder containing build.py, setup.json, the Blender scene, two clean renders, paired SVGs with and without editable lettering, and a README/report. SVG optics remain raster, with vector lettering in a separate layer. Gaussian envelopes are display geometry, not simulated diffraction. Mechanical fits are not certified.
+One dated figure folder with python/, blender/, json/, md/, txt/, source/, renders/, svg/ and FinalFigure/. Working filenames end in _vXX. See [figure workflow](../../docs/figure-workflow.md). SVG optics remain raster, with vector lettering in a separate layer. Gaussian envelopes are display geometry, not simulated diffraction. Mechanical fits are not certified.
 
-After selecting the POV, follow [the finishing steps](../../docs/scene-finishing.md) to restore the translucent beams and position studio illumination relative to the camera.
+After selecting the POV, follow [the finishing steps](../../docs/scene-finishing.md) to preserve the approved beams and position studio illumination relative to the camera. After visual approval, run `python scripts/finalize_figure.py Figures/2026-11-10-Fig03 --stage compact --version 4 --approved`.
 
 Asset audit: local and published SO_Iris and SO_Pinhole geometry match; see `../../docs/asset-audit.json`. The saved scene now uses those assets plus SO_Collimator. `scene-validation.json` verifies both 5/10/5 BU relays, the open pinhole center, and iris rejection. Historical dated figure folders preserve earlier versions; this bundled source and expected/ are the current example.

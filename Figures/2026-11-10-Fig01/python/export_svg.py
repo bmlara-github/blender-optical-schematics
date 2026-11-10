@@ -2,7 +2,7 @@
 import argparse,base64,html,json
 from pathlib import Path
 from PIL import Image
-ROOT=Path(__file__).resolve().parents[2]
+ROOT=Path(__file__).resolve().parents[3]
 LABELS={'fixed': [('Laser', 410, 845, 38), ('P', 670, 780, 38), ('L1P', 900, 715, 38), ('L2P', 1340, 590, 38), ('SLM', 1530, 540, 38), ('L2', 1540, 875, 38), ('SF', 1440, 1045, 38), ('L1', 1290, 1175, 38), ('CCD', 1200, 1290, 38)], 'compact': [('Laser', 1040, 585, 38), ('P', 1100, 635, 38), ('L1P', 1260, 720, 38), ('L2P', 1570, 875, 38), ('SLM', 1740, 875, 38), ('L2', 1405, 1125, 38), ('SF', 1150, 1110, 38), ('L1', 935, 1080, 38), ('CCD', 710, 1050, 38)]}
 
 def export(output,stage,width_mm=86,border_mm=.5):

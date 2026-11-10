@@ -1,7 +1,7 @@
 # Optical library and figure conventions
 
 - Add newly designed optical components and reusable beam representations to `library/`, with asset metadata and documentation. Reuse them as instances in figures.
-- Save each figure under `Figures/YYYY-MM-DD-FIgNN/` using the user's local date. Keep its Blender file, source, renders, SVGs and notes together.
+- Save each figure under `Figures/YYYY-MM-DD-FigXX/` using the user's local date. Keep its Blender file, source, renders, SVGs and notes together.
 - Produce matching SVGs with editable lettering and without lettering. For realistic Blender materials, embed the clean raster render in the SVG and keep all lettering in a separate editable vector layer; clearly disclose that the optical rendering is raster.
 - Default to 86 mm width for a single column when no size is requested. Use the user's requested width when provided. A proportional column-and-a-half is 129 mm and double column is 172 mm; use publication-specific dimensions when supplied. Preserve the aspect ratio and set explicit millimeter dimensions on the SVG root.
 - Place reference images near their associated optical component. Do not draw cable-like connecting lines unless the user explicitly asks for them.
@@ -14,3 +14,8 @@
 - Do not add sparse direction arrows to beam paths by default. Use continuous beam geometry; add arrows only when explicitly requested or when a consistent, purposeful annotation scheme is agreed.
 
 - When asked to optimize a schematic POV, follow `docs/camera-view-search.md`. Keep optical geometry fixed, compare and refine camera angles, re-anchor reference panels, exclude clipped or unreadable views, and preserve the original. Judge both empty page area and readability; do not claim a global optimum from a finite search. Save the chosen camera preset and paired SVGs. Close task-opened application windows after saving.
+
+
+## Versioned figures and final approval
+
+Follow [docs/figure-workflow.md](docs/figure-workflow.md) and steps 11a–12a of the user guide. One date-FigXX folder per figure; use python/, blender/, json/, md/, txt/ and existing image folders, with _vXX filename suffixes. Select the POV, save a new illumination version while preserving approved beams and layout, inspect and obtain visual approval, then copy the approved scene and paired SVGs into FinalFigure/. Camera selection alone is not final approval. Close task-opened application windows after saving.

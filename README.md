@@ -62,3 +62,8 @@ Ask the agent to compare camera angles when a schematic contains too much empty 
 The [step-by-step user guide](docs/user-guide.pdf) uses the original [paper setup](examples/paper-setup/README.md) throughout, including the saved fixed POV, 15-view sampler and paired SVG export.
 
 After selecting the POV, follow [the finishing steps](docs/scene-finishing.md) to restore the translucent beams and position studio illumination relative to the camera.
+
+
+## Versioned figures and final approval
+
+Follow [docs/figure-workflow.md](docs/figure-workflow.md) and steps 11a–12a of the user guide. One date-FigXX folder per figure; use python/, blender/, json/, md/, txt/ and existing image folders, with _vXX filename suffixes. Select the POV, save a new illumination version while preserving approved beams and layout, inspect and obtain visual approval, then copy the approved scene and paired SVGs into FinalFigure/. Camera selection alone is not final approval. Close task-opened application windows after saving.

@@ -5,3 +5,8 @@ Original nine-component paper setup; original SLM and CCD images. Both accepted 
 Run the guide through Step 11, then `workflow.finish('compact', OUT)` and optionally `workflow.finish('fixed', OUT)`. Export the `OUT/finished` directory with the example exporter. The final figures here are 86 mm wide, with 0.5 mm borders and editable vector lettering over raster optics. Local source copies and both Blender scenes are retained here.
 
 Key (-12,14,18), fill (14,5,12), rim (4,12,-10), in camera right/up/front axes about target (-3,0,1.6). Powers 3300/1100/2200 W, sizes 11/12/8 BU, world strength .25, AgX, Cycles 64 samples and denoising. The compact direction still shows the back of the SLM; use fixed when its active face must be visible.
+
+
+## File organization
+
+Use `python/` for scripts, `blender/` for scenes and Blender backups, `json/` for structured settings and validation, `md/` for notes, and `txt/` for logs. Keep images in the existing `source/`, `renders/`, and `svg/` folders. Preserve `_vXX` filenames. After selecting a scene, copy its final Blender scene and paired SVG exports into `FinalFigure/`; working versions remain in their type folders.

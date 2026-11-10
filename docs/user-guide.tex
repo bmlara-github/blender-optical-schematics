@@ -114,9 +114,9 @@ from pathlib import Path
 ROOT = Path('/path/to/blender-optical-schematics')
 sys.path.insert(0, str(ROOT/'examples/paper-setup'))
 import workflow
-OUT = 'Figures/2026-11-10-FIg01'
+OUT = 'Figures/2026-11-10-Fig03'
 \end{Verbatim}
-Use the same \texttt{OUT} in all later steps. Substitute your local date and an unused figure number. Calls that would replace a saved fixed or compact scene stop with an error; choose a new output folder instead. The module \texttt{workflow} knows the project root, so this relative output path does not depend on Blender's current working directory.
+Use the same \texttt{OUT} in all later steps. Substitute your local date and an unused figure number. Calls that would replace a saved fixed or compact scene stop with an error; use the next version number within the same figure folder instead. The module \texttt{workflow} knows the project root, so this relative output path does not depend on Blender's current working directory.
 
 \clearpage
 \section*{7. Reproduce the fixed POV}
@@ -124,7 +124,7 @@ In that same Blender console, run:
 \begin{Verbatim}[fontsize=\small]
 workflow.run('fixed', OUT)
 \end{Verbatim}
-This opens the original scene, reloads and packs its two bundled images, applies \textbf{Folded Relay --- Front-Left}, re-anchors both image panels, saves \texttt{fixed.blend}, and renders \texttt{renders/fixed.png}.
+This opens the original scene, reloads and packs its two bundled images, applies \textbf{Folded Relay --- Front-Left}, re-anchors both image panels, saves \path{blender/fixed_v01.blend}, and renders \path{renders/fixed_v01.png}.
 
 \begin{center}
 \includegraphics[width=110mm,height=100mm,keepaspectratio]{../images/camera-walkthrough/fixed.png}
@@ -200,7 +200,7 @@ This code explains the call already performed above; do not run both into the sa
 \section*{10. Rank the coarse views and refine the search}
 \textbf{Outside Blender,} open a terminal at the project root. Use a Python interpreter with Pillow. Replace the output path with the same folder chosen in Step 6:
 \begin{Verbatim}[fontsize=\small]
-python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/coarse
+python scripts/rank_camera_views.py Figures/2026-11-10-Fig03/coarse
 \end{Verbatim}
 Open \texttt{coarse/comparison.png} and \texttt{coarse/ranked.json}. The script calls \texttt{rank(directory)}; its \texttt{measure(image)} function reports crop bounds, cropped page height, occupied fraction and approximate empty page area at 86 mm width. Empty or clipped previews are flagged invalid. Transparent glass and beams make coverage threshold-dependent; the ranking supports visual judgement rather than replacing it.
 
@@ -210,7 +210,7 @@ workflow.run('refine', OUT)
 \end{Verbatim}
 Then in the terminal:
 \begin{Verbatim}[fontsize=\small]
-python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/refine
+python scripts/rank_camera_views.py Figures/2026-11-10-Fig03/refine
 \end{Verbatim}
 This tests azimuths $(-105,-75)^\circ$ and elevations $(15,25,35)^\circ$. The panel callback and optical geometry are unchanged.
 \begin{center}
@@ -224,7 +224,7 @@ For this walkthrough, use the included compact oblique direction, $-75^\circ$ az
 \begin{Verbatim}[fontsize=\small]
 workflow.run('compact', OUT)
 \end{Verbatim}
-This saves \texttt{compact.blend}, \texttt{compact-camera.json}, \texttt{compact-panels.json}, \path{compact-anchors.json} and \texttt{renders/compact.png} next to the fixed-view results. It applies the named preset with scale 44 and a $2400\times1800$ canvas, then re-anchors the panels and renders at 64 samples.
+This saves \path{blender/compact_v03.blend}, versioned camera, panel and anchor JSON files in \path{json/}, and \path{renders/compact_v03.png} next to the fixed-view results. It applies the named preset with scale 44 and a $2400\times1800$ canvas, then re-anchors the panels and renders at 64 samples.
 \begin{center}
 \includegraphics[width=\linewidth]{../images/camera-walkthrough/compact.png}
 \end{center}
@@ -246,9 +246,10 @@ Choose and save the camera first. Keep that camera and the component positions f
 
 \textbf{Apply the finishing step.} In the same Blender console, after Step 11:
 \begin{Verbatim}[fontsize=\small]
-workflow.finish('compact', OUT, samples=64)
+workflow.finish('compact', OUT, samples=128,
+                version=4, source_version=3)
 \end{Verbatim}
-This opens the saved compact scene, restores the translucent beam envelope and thin shaded red core used in the local tests, and places three area lights relative to the selected camera. It saves a separate \path{finished/compact.blend}, lighting report and \path{finished/renders/compact.png}. The original camera study remains available. Run \texttt{workflow.finish('fixed', OUT)} to finish the fixed view too.
+This opens \path{blender/compact_v03.blend}, preserves its approved beam materials, and places three area lights relative to the selected camera. It saves \path{blender/compact_v04.blend}, a versioned lighting report in \path{json/}, and \path{renders/compact_v04.png}. The camera and component transforms are checked for equality. Images are packed into the scene. Run \texttt{workflow.finish('fixed', OUT)} to illuminate the fixed view too. For another revision, use \texttt{version=5, source\_version=4}.
 
 \textbf{Position lights in the camera frame.} Camera-right is $+x$, camera-up is $+y$, and toward the camera is $+z$. Each light points at the setup target $(-3,0,1.6)$. These are schematic Blender units, not physical experiment dimensions.
 \begin{center}
@@ -265,7 +266,7 @@ The large upper-left key creates different brightness on adjacent housing faces.
 \begin{Verbatim}[fontsize=\small]
 from finish_scene import finish_scene
 scene = bpy.context.scene
-finish_scene(scene, target=(-3,0,1.6),
+finish_scene(scene, target=(-3,0,1.6), restore_beams=False,
     key_power=3300, fill_power=1100,
     rim_power=2200, world_strength=.25)
 scene.cycles.samples = 16
@@ -288,45 +289,65 @@ If the image looks flat, reduce fill or ambient strength before increasing the k
 
 \textbf{Beam settings.} Selected and rejected envelopes share red $(1,.008,.003)$, with emission strengths 0.7 and 0.336 and transparent/emission mix factors 0.21 and 0.14. Thin shaded cores use emission strength 0.2. Their radius is capped at 80 percent of the narrowest local envelope radius. Rejected orders are dimmer red. These are illustrative envelopes, not simulated diffraction or measurements.
 
-\textbf{Final checks.} View the transparent PNG on white. Confirm separate beam branches, visible apertures, gentle lens highlights, shaded housing faces and readable image panels. Use AgX, denoising and 64 samples for the supplied final renders; increase samples if a close inspection shows noise. After manual tuning, set samples back to 64, set the render path back to \path{finished/renders/compact.png}, save \path{finished/compact.blend}, and render again. Then export the finished render in Step 12.
+\textbf{Final checks.} View the transparent PNG on white. Confirm separate beam branches, visible apertures, gentle lens highlights, shaded housing faces and readable image panels. Use AgX, denoising and 128 samples for the new illuminated version; increase samples if a close inspection shows noise. After manual tuning, render to \path{renders/compact_v04.png} and save \path{blender/compact_v04.blend}. Preserve an approved version by saving later changes with the next suffix. Then export the finished render in Step 12.
 
 \clearpage
 \section*{12. Export and inspect both SVG pairs}
 Run these commands in a terminal at the project root, outside Blender:
 \begin{Verbatim}[fontsize=\small]
 python examples/paper-setup/export.py \
-  Figures/2026-11-10-FIg01/finished fixed
+  Figures/2026-11-10-Fig03 fixed --version 4
 python examples/paper-setup/export.py \
-  Figures/2026-11-10-FIg01/finished compact
+  Figures/2026-11-10-Fig03 compact --version 4
 \end{Verbatim}
 The function \texttt{export(output, stage, width\_mm=86, border\_mm=.5)} crops the transparent PNG to its content, preserves its aspect ratio and places it 0.5 mm from every page edge. It produces:
 \begin{Verbatim}[fontsize=\small]
-Figures/2026-11-10-FIg01/
-  fixed.blend                 Original camera study
-  compact.blend
-  coarse/                     Nine candidates and ranking
-  refine/                     Six candidates and ranking
-  finished/
-    fixed.blend               Finished illumination and beams
-    compact.blend
-    fixed-lighting.json        Lighting recipe
-    compact-lighting.json
-    renders/                  Final PNGs and cropped PNGs
-    svg/
-      fixed_lettered.svg      Editable labels over raster
-      fixed_unlettered.svg
-      compact_lettered.svg
-      compact_unlettered.svg
-    fixed-export.json         Page dimensions and borders
-    compact-export.json
+Figures/2026-11-10-Fig03/
+  python/                     Figure-specific scripts
+  blender/                    fixed_v01, compact_v03, compact_v04
+  json/                       Versioned camera/lighting/checks
+  md/                         Notes and approval status
+  txt/                        Execution logs
+  source/                     Input data images
+  renders/                    compact_v04.png and previews
+  svg/                        compact_lettered_v04.svg
+                              compact_unlettered_v04.svg
+  coarse/                     Nine camera candidates
+  refine/                     Six camera candidates
+  FinalFigure/                Empty until visual approval
 \end{Verbatim}
 \begin{enumerate}
 \item Open the lettered SVG in a vector editor. Check that every label names the correct component and that none collides with an optic or panel.
 \item Confirm the document width is 86 mm and all four outer borders are 0.5 mm. The height follows the cropped render; it is not a fixed paper size.
 \item Edit text in the \texttt{lettering} layer. The \texttt{render} layer is an embedded raster image. The unlettered partner uses the same render and dimensions.
-\item Check the JSON reports, then use the final SVG in your manuscript. Close application windows you opened after saving your work.
+\item Check the JSON reports and obtain visual approval before marking the figure final. Close application windows you opened after saving your work.
 \end{enumerate}
 Use \texttt{--width-mm 129} or \texttt{--width-mm 172} for wider publication columns. The border remains 0.5 mm unless explicitly overridden with \texttt{--border-mm}. Lettering positions in the supplied exporter are calibrated to this one example and its two documented camera views.
+
+\clearpage
+\section*{12a. Approve and collect the final version}
+\textbf{One folder per figure.} Keep the date and figure number fixed across revisions. Use consecutive \texttt{FigXX} numbers within each date and project, with exact capitalization. Append \texttt{\_vXX} to filenames, before the extension. A new camera or lighting revision does not need another figure folder. Reusable scripts and libraries retain their project locations.
+
+\textbf{Composition is not final approval.} The selected POV may still look flat. Finish the lighting in Steps 11a--11b and inspect the same original example on white. Check shaded housing faces, clear iris and pinhole openings, restrained highlights, approved beam appearance and unobstructed reference panels. If appearance is not accepted, keep it as a working version and leave \path{FinalFigure/} empty. Keep an already approved set until its replacement is approved.
+
+\textbf{After approval.} For the illuminated compact view from Step 12, run:
+\begin{Verbatim}[fontsize=\small]
+python scripts/finalize_figure.py \
+  Figures/2026-11-10-Fig03 \
+  --stage compact --version 4 --approved
+\end{Verbatim}
+The \texttt{--approved} flag records approval already given by the figure owner; it is not an automatic aesthetic test. The helper requires the scene and both SVGs, checks matching SVG dimensions, copies them, and verifies file hashes. It refuses to overwrite different approved files with the same names. The result is:
+\begin{Verbatim}[fontsize=\small]
+FinalFigure/
+  compact_v04.blend
+  compact_lettered_v04.svg
+  compact_unlettered_v04.svg
+json/
+  compact-approval_v04.json
+\end{Verbatim}
+Earlier versions remain in their type folders. Close task-opened Blender and viewer windows after saving. The complete convention is also in \path{docs/figure-workflow.md}.
+
+\textbf{Panel clearance and schematic hardware.} The original example keeps its existing panels. When adding a translation rail in another figure, use the library's minimal rail and carriage, with the CCD directly on the carriage. If the lower-left anchor creates overlap, call \texttt{housing\_corner(..., vertical='top')} for the CCD rear left corner. Align the panel's lower-right corner vertically to it, measure the horizontal gap from the entire instrument silhouette, and check projected overlap with every component. Recompute the placement after camera changes.
 
 \clearpage
 \section*{13. Use the assets and beam functions on the same example}
@@ -334,7 +355,7 @@ The bundled scene uses collection instances from the schematic library. Select a
 
 \textbf{Reference-image replacement.} To try your own data while keeping this example, copy \texttt{examples/paper-setup/} to a separate project copy, replace \path{reference-images/slm_hologram.png} and \texttt{ccd\_intensity.png}, and run the workflow into a new output folder. \texttt{load\_example()} reloads these files and packs them; \texttt{update\_reference\_panels()} updates alignment. Do not invent missing data images.
 
-\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. The camera-search previews use the restored translucent envelopes and shaded cores. Steps 11a--11b restore the approved translucent envelope and shaded core for the final publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
+\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. The camera-search previews use the restored translucent envelopes and shaded cores. Steps 11a--11b preserve that approved beam appearance while adjusting illumination. Explicit restoration is available with \texttt{restore\_beams=True}. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
 
 The functions used for these two representations are:
 \begin{Verbatim}[fontsize=\small]
@@ -362,7 +383,8 @@ This optional style exercise still uses the same optical setup. Translation acce
 \item[\texttt{workflow.update\_reference\_panels(scene, camera)}] Calls \texttt{housing\_corner}, \texttt{silhouette\_edge} and \texttt{place\_panel} for both original panels; see Step 8.
 \item[\texttt{render\_camera\_candidates(scene, directory, ...)}] Renders an angle grid with the panel callback, saves each camera JSON and restores the scene; see Step 9.
 \item[\texttt{measure(image)} and \texttt{rank(directory)}] Measure alpha bounds/coverage and publication footprint, flag invalid previews, and build a ranked comparison; see Step 10. These use ordinary Python with Pillow, not Blender Python.
-\item[\texttt{finish\_scene(scene, ...)}] Restores beam appearance and positions the studio lights relative to the chosen camera; see Steps 11a--11b.
+\item[\texttt{finish\_scene(scene, ...)}] Positions camera-relative studio lights; optionally restores beams; see Steps 11a--11b.
+\item[\texttt{finalize(folder, stage, version, approved)}] Copies the approved scene and SVG pair with hash verification; see Step 12a.
 \item[\texttt{export(output, stage, ...)}] Writes the fixed or compact SVG pair and dimension report; see Step 12.
 \item[\texttt{create\_envelope} / \texttt{create\_gaussian\_segment}] Create illustrative beam geometry in a collection; see Step 13.
 \end{description}

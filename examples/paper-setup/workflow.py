@@ -4,9 +4,9 @@ Blender console:
     import sys
     sys.path.insert(0, '/path/to/project/examples/paper-setup')
     import workflow
-    workflow.run('fixed', 'Figures/2026-11-10-FIg01')
+    workflow.run('fixed', 'Figures/2026-11-10-Fig03')
 
-CLI: blender --background --python examples/paper-setup/workflow.py -- fixed --output Figures/2026-11-10-FIg01
+CLI: blender --background --python examples/paper-setup/workflow.py -- fixed --output Figures/2026-11-10-Fig03
 """
 from pathlib import Path
 import sys,json,argparse
@@ -46,15 +46,19 @@ def load_example():
     return bpy.context.scene
 
 
-def run(stage,output):
+def run(stage,output,version=None):
     """stage is fixed, coarse, refine, or compact; output is relative to root."""
     if stage not in ['fixed','coarse','refine','compact']:
         raise ValueError('Stage must be fixed, coarse, refine, or compact')
     out=Path(output)
     if not out.is_absolute():out=ROOT/out
     out.mkdir(parents=True,exist_ok=True)
-    if stage in ['fixed','compact'] and (out/(stage+'.blend')).exists():
-        raise FileExistsError('Preserve prior results: choose a new output folder')
+    for folder in ['python','blender','json','md','txt','source','renders','svg','FinalFigure']:
+        (out/folder).mkdir(exist_ok=True)
+    version=version or (3 if stage=='compact' else 1)
+    tag=f'_v{version:02d}'
+    if stage in ['fixed','compact'] and (out/'blender'/(stage+tag+'.blend')).exists():
+        raise FileExistsError('Preserve prior results: choose the next version number in this figure folder')
     scene=load_example()
     preset=ROOT/'library/camera-presets'/('folded-relay-compact-oblique.json' if stage=='compact' else 'folded-relay-front-left.json')
     camera=apply_camera_preset(scene,preset,ortho_scale=44,resolution=(2400,1800))
@@ -67,41 +71,47 @@ def run(stage,output):
             update_panels=update_reference_panels)
     (out/'renders').mkdir(exist_ok=True)
     scene.cycles.samples=64
-    scene.render.filepath=str(out/'renders'/(stage+'.png'))
+    scene.render.filepath=str(out/'renders'/(stage+tag+'.png'))
     anchors=[]
     for name in ['Laser','Collimator','P','L1P','L2P','SLM','L2','SF','L1','CCD']:
         p=world_to_camera_view(scene,camera,bpy.data.objects[name].location)
         anchors.append(dict(name=name,x=p.x*scene.render.resolution_x,
                             y=(1-p.y)*scene.render.resolution_y))
-    (out/(stage+'-anchors.json')).write_text(json.dumps(anchors,indent=2))
-    (out/(stage+'-panels.json')).write_text(json.dumps(checks,indent=2))
+    (out/'json'/(stage+'-anchors'+tag+'.json')).write_text(json.dumps(anchors,indent=2))
+    (out/'json'/(stage+'-panels'+tag+'.json')).write_text(json.dumps(checks,indent=2))
     camera_record=json.loads(preset.read_text())
     camera_record['orthographic_scale']=camera.data.ortho_scale
     camera_record['resolution']=[scene.render.resolution_x,scene.render.resolution_y]
-    (out/(stage+'-camera.json')).write_text(json.dumps(camera_record,indent=2))
-    bpy.ops.wm.save_as_mainfile(filepath=str(out/(stage+'.blend')))
+    (out/'json'/(stage+'-camera'+tag+'.json')).write_text(json.dumps(camera_record,indent=2))
+    bpy.ops.wm.save_as_mainfile(filepath=str(out/'blender'/(stage+tag+'.blend')))
     bpy.ops.render.render(write_still=True)
     return str(out)
 
-def finish(stage, output, samples=64, **lighting):
-    """Finish an existing selected view; save separately under finished/."""
+def finish(stage, output, samples=128, version=4, source_version=None, **lighting):
+    """Light a selected version without moving optics or changing approved beams."""
     from finish_scene import finish_scene
     if stage not in ['fixed','compact']:raise ValueError('Choose fixed or compact')
     out=Path(output)
     if not out.is_absolute():out=ROOT/out
-    destination=out/'finished'
-    destination.mkdir(exist_ok=True);(destination/'renders').mkdir(exist_ok=True)
-    if (destination/(stage+'.blend')).exists():
-        raise FileExistsError('Preserve the finished scene; choose another output folder')
-    bpy.ops.wm.open_mainfile(filepath=str(out/(stage+'.blend')),load_ui=False)
+    source_version=source_version or (3 if stage=='compact' else 1)
+    tag=f'_v{version:02d}'
+    destination=out/'blender'/(stage+tag+'.blend')
+    if destination.exists():raise FileExistsError('Choose the next version; do not overwrite saved work')
+    source=out/'blender'/f'{stage}_v{source_version:02d}.blend'
+    bpy.ops.wm.open_mainfile(filepath=str(source),load_ui=False)
     scene=bpy.context.scene
+    before={o.name:tuple(tuple(row) for row in o.matrix_world) for o in scene.objects if o.type!='LIGHT'}
+    lighting.setdefault('restore_beams',False)
     report=finish_scene(scene,**lighting)
+    assert all(before[o.name]==tuple(tuple(row) for row in o.matrix_world) for o in scene.objects if o.name in before)
+    report.update(source_version=source_version,version=version,status='working; awaiting visual approval',camera_and_geometry_unchanged=True)
     scene.cycles.samples=samples
-    scene.render.filepath=str(destination/'renders'/(stage+'.png'))
-    (destination/(stage+'-lighting.json')).write_text(json.dumps(report,indent=2))
-    bpy.ops.wm.save_as_mainfile(filepath=str(destination/(stage+'.blend')))
+    scene.render.filepath=str(out/'renders'/(stage+tag+'.png'))
+    bpy.ops.file.pack_all()
+    (out/'json'/(stage+'-lighting'+tag+'.json')).write_text(json.dumps(report,indent=2))
+    bpy.ops.wm.save_as_mainfile(filepath=str(destination))
     bpy.ops.render.render(write_still=True)
-    return str(destination)
+    return str(out)
 
 if __name__=='__main__':
     args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
