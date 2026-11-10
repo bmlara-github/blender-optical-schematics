@@ -13,12 +13,13 @@ def unproject(scene, camera, uv, depth):
     k=depth/(-corners[0].z) if camera.data.type=='PERSP' else 1
     return camera.matrix_world @ Vector(((xmin+uv[0]*(xmax-xmin))*k,(ymin+uv[1]*(ymax-ymin))*k,-depth))
 
-def housing_corner(scene, camera, instance, housing_prefix, face, side):
+def housing_corner(scene, camera, instance, housing_prefix, face, side, vertical="bottom"):
     """Semantic front/rear face is local -Y/+Y; left/right is screen-relative."""
     body=next(o for o in instance.instance_collection.objects if o.name.startswith(housing_prefix))
     points=[Vector(p) for p in body.bound_box]
     yy=(min if face=='front' else max)(p.y for p in points)
-    zz=min(p.z for p in points)
+    if vertical not in ("bottom", "top"): raise ValueError("vertical must be bottom or top")
+    zz=(min if vertical=="bottom" else max)(p.z for p in points)
     world=[instance.matrix_world @ body.matrix_world @ p for p in points if abs(p.y-yy)<1e-5 and abs(p.z-zz)<1e-5]
     return (min if side=='left' else max)(world,key=lambda p:project(scene,camera,p).x)
 

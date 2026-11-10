@@ -4,7 +4,7 @@
     {
       "collection": "SO_Translation_Rail",
       "library": "Bllas_Schematic_Optics_Translation.blend",
-      "description": "Fixed translation rail; use with independent carriage.",
+      "description": "Minimal schematic rail: a single rectangular base; no guide rods or end stops.",
       "meters_per_blender_unit": 0.01,
       "axis": "+Y",
       "index": 24
@@ -12,7 +12,7 @@
     {
       "collection": "SO_Translation_Carriage",
       "library": "Bllas_Schematic_Optics_Translation.blend",
-      "description": "Moving carriage; use the same translation transform for the detector and its support.",
+      "description": "Minimal thin camera platform; CCD rests directly on top, without a pedestal.",
       "meters_per_blender_unit": 0.01,
       "axis": "+Y",
       "index": 25
