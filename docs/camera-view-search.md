@@ -58,7 +58,7 @@ This creates `comparison.png` and `ranked.json`. Each candidate already has its 
 
 The measurements are cropped page height, alpha-mask occupied fraction and approximate empty page area. The ranking uses empty page area, not height alone. Alpha coverage is only a proxy: glass and translucent beams make its numerical value threshold-dependent. A compact but unreadable view is not a valid choice. Reject edge-on apertures, hidden SLM faces, overlapping components, indistinguishable beam branches and cropped image panels. Add the final lettering before accepting the composition.
 
-Refine promising angles with a smaller grid, keeping enough elevation for depth cues. In the initial 15-view study, azimuth -75 degrees and elevation 25 degrees provided a compact, readable compromise. The corresponding page height was 23.47 mm at 86 mm width, compared with 80.58 mm for the earlier view. This is a result for that layout, not a guarantee or proof of a global minimum.
+Refine promising angles with a smaller grid. The [single worked example](../examples/paper-setup/README.md) and [user guide](user-guide.pdf) use the original paper setup for both the nine-view coarse sampler and six-view refinement. The -75 degree / 25 degree preset is demonstrated as an alternative; it shows the back of the SLM and is unsuitable when the active face must be visible. Compare the supplied fixed view before accepting it. No global minimum is claimed.
 
 ## Apply and export
 

@@ -11,7 +11,7 @@
 \begin{document}\maketitle
 \includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{../images/paper-example.png}\par
 \medskip
-\textbf{What you will make.} A Blender recreation of the optical setup illustrated in the paper, with an editable Blender file, two rendered views and SVGs with editable labels. This image is a reference preview from our later reconstruction, with the supplied SLM hologram and CCD intensity panels beside their instruments. Your first run follows the supplied layout; exact framing may vary because the agent writes the scene builder.
+\textbf{What you will make.} A Blender recreation of the optical setup illustrated in the paper, with an editable Blender file, a fixed view, a camera-search sampler and a selected view and SVGs with editable labels. This image is a reference preview from our later reconstruction, with the supplied SLM hologram and CCD intensity panels beside their instruments. Every step below uses this original paper-setup example. A bundled scene and tested workflow reproduce it without designing a second setup.
 
 \textbf{What inspired this project.} The basic optical-setup schematic in \url{https://doi.org/10.1103/6ftp-svh8} motivated the development of this Blender library. The paper contains no Blender model. The models and this example were created afterward; they were neither used in nor supplied with that publication. The paper DOI identifies the article, not this library.
 
@@ -41,8 +41,8 @@ blender-optical-schematics/
       SKILL.md
       agents/
       references/
-  examples/paper-setup/      Prompt and starting layout
-  scripts/                  Reusable beam helper
+  examples/paper-setup/      Scene, inputs and runnable workflow
+  scripts/                  Camera, panel and beam helpers
   images/                   Catalogue and example preview
   docs/                     This PDF and its LaTeX source
 \end{Verbatim}
@@ -89,69 +89,241 @@ The installer uses only standard Python. If Python is unavailable, the manual al
 blender-optical-schematics/.agents/skills/setup-to-blender/SKILL.md
 \end{Verbatim}
 The dot-prefixed \texttt{.agents} folder is normally hidden. Keep the visible \texttt{agent/} folder as the original distribution. After optional installation, start a new chat in the same project. If the named skill is still not recognized, use the direct call below; it does not depend on skill discovery.
-\section*{6. Generate the example inspired by the paper}
-For the first run, use the supplied list and layout without adding files. Paste this exact request in the project chat:
-\begin{Verbatim}[fontsize=\small]
-Read agent/setup-to-blender/SKILL.md and follow it to carry
-out examples/paper-setup/prompt.md. Use this project only.
-Generate the paper-setup example now, not just a plan.
-Use the supplied layout assumptions and both bundled
-SLM/CCD image panels. Save to a new dated Figures folder; preserve
-existing files and libraries. Run Blender, inspect both
-views, and give me links to the Blender file, renders,
-paired SVGs and the validation/assumptions notes.
-\end{Verbatim}
-If the named skill is installed, the shorter equivalent is:
-\begin{Verbatim}[fontsize=\small]
-Use $setup-to-blender to execute
-examples/paper-setup/prompt.md and generate the example.
-\end{Verbatim}
-Codex writes the scene plan and build script, runs Blender, exports the figures and checks them. Rendering can take time; wait for a completion report. Respond to any application access request only after checking that it concerns this project and Blender. Do not close the running task before it finishes.
+
 \clearpage
-\section*{7. Find and open your finished figure}
-The agent selects an unused figure number using your local date. A typical output folder looks like this; the date and filenames may differ, so use the links in its completion message.
+\section*{6. Open the one example used throughout this guide}
+We keep the original setup: Laser, circular pupil P, L1P, L2P, reflective SLM, L2, spatial filter SF, L1 and CCD. The selected order passes SF; the rejected orders stop there. Focal lengths are unspecified.
+
+The folder \path{examples/paper-setup/} now contains \texttt{source.blend}, \texttt{workflow.py}, \texttt{export.py}, the two original reference images, and \texttt{expected/}. The bundled scene is the exact starting point for every illustration below. The older \texttt{layout.json} remains an approximate authoring plan; it is not an executable scene or a replacement for these saved transforms.
+
+\textbf{In Codex, the no-code route.} Paste:
+\begin{quote}
+Read examples/paper-setup/README.md. Use its bundled source.blend and workflow.py for the original paper setup. Reproduce the fixed view, coarse search, refined search and selected view, in order, in one new dated Figures folder. Run the ranking and paired SVG exports. Preserve the original optics, labels and data images. Show the sampler and explain the selected angle. Close task-opened application windows when finished.
+\end{quote}
+
+\textbf{Manual route used by the remaining commands.}
+\begin{enumerate}
+\item Save any unrelated work open in Blender. The workflow opens the bundled scene.
+\item Open Blender's Python Console using an editor's type selector. Paste the following, replacing only the project path and choosing an unused dated output folder.
+\end{enumerate}
 \begin{Verbatim}[fontsize=\small]
-Figures/YYYY-MM-DD-FIgNN/
-  build.py                  Repeatable Blender build
-  setup.json                Interpreted scene plan
-  ...blend                  Editable Blender scene
-  renders/                  Perspective and plan PNGs
-  svg/                      Lettered/unlettered SVG pairs
-  README.md                 Assumptions and checks
+import bpy, sys
+from pathlib import Path
+ROOT = Path('/path/to/blender-optical-schematics')
+sys.path.insert(0, str(ROOT/'examples/paper-setup'))
+import workflow
+OUT = 'Figures/2026-11-10-FIg01'
+\end{Verbatim}
+Use the same \texttt{OUT} in all later steps. Substitute your local date and an unused figure number. Calls that would replace a saved fixed or compact scene stop with an error; choose a new output folder instead. The module \texttt{workflow} knows the project root, so this relative output path does not depend on Blender's current working directory.
+
+\clearpage
+\section*{7. Reproduce the fixed POV}
+In that same Blender console, run:
+\begin{Verbatim}[fontsize=\small]
+workflow.run('fixed', OUT)
+\end{Verbatim}
+This opens the original scene, reloads and packs its two bundled images, applies \textbf{Folded Relay --- Front-Left}, re-anchors both image panels, saves \texttt{fixed.blend}, and renders \texttt{renders/fixed.png}.
+
+\begin{center}
+\includegraphics[width=110mm,height=100mm,keepaspectratio]{../images/camera-walkthrough/fixed.png}
+\end{center}
+\textbf{Fixed-view checkpoint.} Your output should show these same nine labeled components and the same two data images. This is your fixed viewing direction applied to the original example. The camera position is $(-34,-20,40)$ and target $(-3,-1,1.6)$. Orthographic scale 44 fits this original setup; it changes framing without changing the viewing direction. Rendering uses $2400\times1800$ pixels.
+
+\textbf{The underlying function.} The wrapper calls:
+\begin{Verbatim}[fontsize=\small]
+sys.path.insert(0, str(ROOT/'scripts'))
+from camera_presets import apply_camera_preset
+preset = ROOT/'library/camera-presets'
+cam = apply_camera_preset(bpy.context.scene,
+    preset/'folded-relay-front-left.json',
+    ortho_scale=44, resolution=(2400, 1800))
+workflow.update_reference_panels(bpy.context.scene, cam)
+\end{Verbatim}
+Use \texttt{target=} to reframe around another point, \texttt{ortho\_scale=} to change the field of view, and \texttt{resolution=} to choose pixel dimensions. Distances are converted using the destination scene's units; \texttt{unit\_scale=1} replays the stored coordinates literally. This example uses 0.01 metres per Blender unit, with illustrative rather than metric optical spacing.
+
+\clearpage
+\section*{8. Keep the same reference panels aligned}
+Changing a camera does not automatically orient or position its image panels. The workflow's callback reuses the original CCD and SLM panels. It keeps the CCD panel to the left of the CCD and the SLM panel to the right of the SLM, with the established lower-corner alignment and equal silhouette clearance.
+
+\textbf{Run after a manual camera change:}
+\begin{Verbatim}[fontsize=\small]
+scene = bpy.context.scene
+checks = workflow.update_reference_panels(scene, scene.camera)
+\end{Verbatim}
+The callback calls the following three functions from \texttt{panel\_layout.py}. This is the CCD part of the actual example:
+\begin{Verbatim}[fontsize=\small]
+from panel_layout import (housing_corner,
+    silhouette_edge, place_panel)
+obj = bpy.data.objects['CCD']
+anchor = housing_corner(scene, scene.camera, obj,
+    'Camera housing', 'rear', 'left')
+edge = silhouette_edge(scene, scene.camera, obj, 'left')
+check = place_panel(scene, scene.camera,
+    bpy.data.objects['CCD intensity'],
+    bpy.data.objects['Reference frame'],
+    anchor, 'left', .012, width=3.4, edge_u=edge)
+\end{Verbatim}
+\begin{description}[style=nextline]
+\item[\texttt{housing\_corner}] Finds the selected lower corner of the instrument housing in world coordinates.
+\item[\texttt{silhouette\_edge}] Finds the instrument's full projected edge, including protrusions, so the image panel clears the whole instrument.
+\item[\texttt{place\_panel}] Makes the image camera-parallel and aligns its lower inner corner. Here width 3.4 is in schematic Blender units and 0.012 is a fraction of the uncropped render width, not the final page border.
+\end{description}
+The SLM part uses \texttt{'SLM'}, \texttt{'SLM hologram'}, \texttt{'SLM reference frame'}, \texttt{'SLM housing'}, \texttt{'front'} and \texttt{'right'}. Use the supplied callback to update both together. Its output is saved as \texttt{fixed-panels.json} or \texttt{compact-panels.json}. Check that both panels face the camera, neither obscures an optic, and their lower corners align. The 0.5 mm page borders are applied later during SVG export.
+
+\clearpage
+\section*{9. Render the coarse camera search}
+Keep the same optical scene and input images. In Blender, run:
+\begin{Verbatim}[fontsize=\small]
+workflow.run('coarse', OUT)
+\end{Verbatim}
+This produces nine previews in \texttt{OUT/coarse/}: three azimuths $(-110,-90,-70)^\circ$ and three elevations $(30,45,60)^\circ$. Each PNG has a camera JSON; \texttt{candidates.json} records the list. The original camera and panel transforms are restored when the sweep finishes.
+
+\textbf{Actual sampler of this same original example}
+\begin{center}
+\includegraphics[width=\linewidth]{../images/camera-walkthrough/coarse.png}
+\end{center}
+\textbf{How the wrapper calls the search function:}
+\begin{Verbatim}[fontsize=\small]
+from search_camera_views import render_camera_candidates
+render_camera_candidates(bpy.context.scene,
+    ROOT/OUT/'coarse', target=(-3, 0, 1.6),
+    azimuths=[-110, -90, -70], elevations=[30, 45, 60],
+    ortho_scale=44, distance=60,
+    resolution=(1000, 800), samples=16,
+    update_panels=workflow.update_reference_panels)
+\end{Verbatim}
+This code explains the call already performed above; do not run both into the same directory. The output directory must be new. Azimuth runs from world $+X$ toward $+Y$; elevation is above the $XY$ plane. The target, distance and orthographic scale are Blender units. Keep these framing settings consistent across candidates. The callback is required here because the example has image panels.
+
+\clearpage
+\section*{10. Rank the coarse views and refine the search}
+\textbf{Outside Blender,} open a terminal at the project root. Use a Python interpreter with Pillow. Replace the output path with the same folder chosen in Step 6:
+\begin{Verbatim}[fontsize=\small]
+python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/coarse
+\end{Verbatim}
+Open \texttt{coarse/comparison.png} and \texttt{coarse/ranked.json}. The script calls \texttt{rank(directory)}; its \texttt{measure(image)} function reports crop bounds, cropped page height, occupied fraction and approximate empty page area at 86 mm width. Empty or clipped previews are flagged invalid. Transparent glass and beams make coverage threshold-dependent; the ranking supports visual judgement rather than replacing it.
+
+\textbf{Refine around promising directions.} In Blender:
+\begin{Verbatim}[fontsize=\small]
+workflow.run('refine', OUT)
+\end{Verbatim}
+Then in the terminal:
+\begin{Verbatim}[fontsize=\small]
+python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/refine
+\end{Verbatim}
+This tests azimuths $(-105,-75)^\circ$ and elevations $(15,25,35)^\circ$. The panel callback and optical geometry are unchanged.
+\begin{center}
+\includegraphics[width=\linewidth]{../images/camera-walkthrough/refined.png}
+\end{center}
+\textbf{Checkpoint.} Compare both samplers. Check the SLM face, pupil and filter, all four lenses, separation of the beam branches, image panels and room for labels. A numerically smaller view may make an aperture edge-on or hide a lens. Inspect before choosing. The bundled samplers are under \path{examples/paper-setup/expected/}; they are previews of this original example, not of a different relay.
+
+\clearpage
+\section*{11. Apply and save the selected POV}
+For this walkthrough, use the included compact oblique direction, $-75^\circ$ azimuth and $25^\circ$ elevation. The original setup remains fixed. Run in Blender:
+\begin{Verbatim}[fontsize=\small]
+workflow.run('compact', OUT)
+\end{Verbatim}
+This saves \texttt{compact.blend}, \texttt{compact-camera.json}, \texttt{compact-panels.json}, \path{compact-anchors.json} and \texttt{renders/compact.png} next to the fixed-view results. It applies the named preset with scale 44 and a $2400\times1800$ canvas, then re-anchors the panels and renders at 64 samples.
+\begin{center}
+\includegraphics[width=\linewidth]{../images/camera-walkthrough/compact.png}
+\end{center}
+\textbf{Selecting another tested candidate.} Each sampler PNG has a camera JSON. For example, to inspect the middle coarse view in the current Blender scene:
+\begin{Verbatim}[fontsize=\small]
+cam = apply_camera_preset(bpy.context.scene,
+    ROOT/OUT/'coarse/view_004.json',
+    resolution=(2400, 1800))
+workflow.update_reference_panels(bpy.context.scene, cam)
+\end{Verbatim}
+Read that JSON's azimuth and elevation before choosing it. Save a separate Blender variant and regenerate label positions for the new camera. Do not overwrite the supplied presets. The exporter in the next step includes checked label layouts for \texttt{fixed} and \texttt{compact}; another angle needs its own lettering layout.
+
+\textbf{What remains invariant.} Component positions, identities, optical topology and data images are the same in both figures. This is a comparison of viewing direction and framing. It is not a change of focal lengths, a diffraction calculation or proof of a globally optimal camera.
+
+\par\textbf{Readability check.} This alternative shows the back of the SLM. Keep the fixed view when the active face must be visible. This is a demonstration of applying a candidate, not a claim of an optimal view.
+\clearpage
+\section*{12. Export and inspect both SVG pairs}
+Run these commands in a terminal at the project root, outside Blender:
+\begin{Verbatim}[fontsize=\small]
+python examples/paper-setup/export.py Figures/2026-11-10-FIg01 fixed
+python examples/paper-setup/export.py Figures/2026-11-10-FIg01 compact
+\end{Verbatim}
+The function \texttt{export(output, stage, width\_mm=86, border\_mm=.5)} crops the transparent PNG to its content, preserves its aspect ratio and places it 0.5 mm from every page edge. It produces:
+\begin{Verbatim}[fontsize=\small]
+Figures/2026-11-10-FIg01/
+  fixed.blend                 Fixed POV, packed data images
+  compact.blend               Selected POV, same setup
+  fixed-camera.json           Exact framing and rotation
+  compact-camera.json
+  fixed-panels.json           Panel-alignment checks
+  compact-panels.json
+  fixed-anchors.json          Component screen coordinates
+  compact-anchors.json
+  coarse/                     Nine PNG/JSON pairs and ranking
+  refine/                     Six PNG/JSON pairs and ranking
+  renders/                    Clean and cropped PNGs
+  svg/
+    fixed_lettered.svg        Editable labels
+    fixed_unlettered.svg
+    compact_lettered.svg      Editable labels
+    compact_unlettered.svg
+  fixed-export.json           Page dimensions and borders
+  compact-export.json
 \end{Verbatim}
 \begin{enumerate}
-\item Double-click the \texttt{.blend} file to open it in Blender. It is the editable result, not a library source file.
-\item Open the PNGs in \texttt{renders/} to review the perspective and overhead views. A window showing only a default cube is not a completed result.
-\item Open a lettered SVG in a vector editor to edit text. The optics are an embedded raster render; the lettering is vector text. The unlettered SVG omits the lettering layer. Default output width is 86 mm.
-\item Read the figure README. Check the optical sequence, labels, assumptions and reported validation before using the image in a publication.
+\item Open the lettered SVG in a vector editor. Check that every label names the correct component and that none collides with an optic or panel.
+\item Confirm the document width is 86 mm and all four outer borders are 0.5 mm. The height follows the cropped render; it is not a fixed paper size.
+\item Edit text in the \texttt{lettering} layer. The \texttt{render} layer is an embedded raster image. The unlettered partner uses the same render and dimensions.
+\item Check the JSON reports, then use the final SVG in your manuscript. Close application windows you opened after saving your work.
 \end{enumerate}
-\textbf{Expected topology.} Laser, circular pupil P, L1P, L2P, reflective SLM, L2, filter SF, L1, CCD. The selected +1 order continues through SF; rejected orders end there. P is not a polarizer. No extra beam splitter is implied. The documented figure labels put L2 nearest SLM and L1 nearest CCD; earlier notes report conflicting manuscript prose.
+Use \texttt{--width-mm 129} or \texttt{--width-mm 172} for wider publication columns. The border remains 0.5 mm unless explicitly overridden with \texttt{--border-mm}. Lettering positions in the supplied exporter are calibrated to this one example and its two documented camera views.
 
-\textbf{What is assumed.} Positions and mounting choices are authored layout assumptions, not measurements. Focal lengths are unknown. The experimental pupil and filter openings are assumed to be 4 mm and 1 mm. Gaussian envelopes are visual guides, not diffraction simulations. Mechanical fit is not certified.
-\section*{8. Add your own sketch or data images later}
-Create \texttt{inputs/paper-setup/} inside the project and place your lawful sketch/PDF and any SLM/CCD reference PNGs there. Tell Codex the exact filenames and which component each image belongs to. Ask for a new figure variant rather than overwriting the first run. The example includes two PNGs in \path{examples/paper-setup/reference-images/}: \texttt{slm\_hologram.png} beside SLM and \texttt{ccd\_intensity.png} beside CCD. They are supplied reference imagery, not Blender simulation results. Their source and existing rights are recorded in that folder's README. The full paper PDF is not bundled. Without a supplied sketch the agent reconstructs the documented topology and must not claim to have checked the original drawing.
 \clearpage
-\section*{9. If something does not work}
-\begin{description}[leftmargin=0pt,style=nextline]
-\item[Codex cannot find SKILL.md or layout.json.] You probably opened the wrong folder or did not extract the ZIP. Return to Step 2, then open the project root in Codex. Confirm \texttt{agent/setup-to-blender/SKILL.md} exists.
-\item[The agent is not listed.] Use the direct file-path call in Step 6. If using the optional installer, verify the exact hidden-folder path in Step 5 and start a new project chat.
-\item[The Blender Asset Browser is empty.] Confirm you registered the \texttt{library/} folder containing the \texttt{.blend} files. Select the correct library and All categories. Reopen Blender if needed. Registration affects manual browsing; a script can still append directly from existing library files.
-\item[Blender is not found.] Install and launch it once. Give Codex its actual executable path. Do not supply a shortcut or the containing folder when an executable is requested.
-\item[Python or Pillow is missing.] Ask Codex to identify the missing dependency and use a project-local environment for the exporter. Blender has its own Python for scene builds. The optional installer needs standard Python, but the direct file-path agent call does not need the installer.
-\item[Codex only returns a plan.] Paste: ``Continue and generate the files. Run Blender, export both views and paired SVGs, then inspect and link the results.'' If it cannot execute locally, switch to a local project session or follow its reported installation fix.
-\item[Rendering is slow.] Ask for a separate preview at 1000 by 800 pixels and 12 samples. Once it looks right, request the final 2000 by 1600 images with 40 samples. Do not present the preview as the final render.
-\item[An SLM or CCD panel is missing.] Confirm both bundled reference PNGs exist. Ask the agent to load them, pack the textures and inspect both camera views. Do not substitute invented data.
-\item[Labels, apertures or beams look wrong.] Ask for a corrected variant and state the specific discrepancy. Moving an optic does not automatically reroute its beam; both need updating in the scene plan. Preserve the original result for comparison.
+\section*{13. Use the assets and beam functions on the same example}
+The bundled scene uses collection instances from the schematic library. Select an instrument instance in Blender to inspect its \texttt{instance\_collection}; do not remodel it or save changes over the source library. The four lenses reuse \texttt{SO\_Biconvex}. Their illustrative shape does not assign a focal length.
+
+\textbf{Reference-image replacement.} To try your own data while keeping this example, copy \texttt{examples/paper-setup/} to a separate project copy, replace \path{reference-images/slm_hologram.png} and \texttt{ccd\_intensity.png}, and run the workflow into a new output folder. \texttt{load\_example()} reloads these files and packs them; \texttt{update\_reference\_panels()} updates alignment. Do not invent missing data images.
+
+\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. For this camera walkthrough, its visible beam paths use the reusable quadratic surface-envelope helper with an emission override for readability on a transparent publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
+
+The functions used for these two representations are:
+\begin{Verbatim}[fontsize=\small]
+from beam_envelope import create_envelope
+from gaussian_beam import create_gaussian_segment
+\end{Verbatim}
+To experiment in a separate scene copy, select one existing beam segment, record its endpoints and radii, hide that segment, and construct its replacement in a dedicated collection. For the original example's L1P-to-waist segment:
+\begin{Verbatim}[fontsize=\small]
+c = bpy.data.collections.new('Beam style trial')
+bpy.context.scene.collection.children.link(c)
+a, b = (-3.6, 4.7, 1.6), (0.2, 1.85, 1.6)
+beam = create_envelope('Input relay trial',
+    a, b, .18, .018, c)
+\end{Verbatim}
+\texttt{create\_envelope} takes 3D endpoints, start/end radii and a collection. The alternative \texttt{create\_gaussian\_segment} takes XY endpoints with \texttt{optical\_height=1.6}, the same radii and collection. Use one representation per segment, not overlapping replacements. Set \texttt{rejected=True} for a rejected order. Rejected paths remain red and dimmer; they stop at SF. Rebuild both views and their exports after any beam change.
+
+This optional style exercise still uses the same optical setup. Translation accessories and the experimental laptop are catalogued elsewhere; they are not inserted as a second example in this guide.
+
+\clearpage
+\section*{14. Function map and troubleshooting}
+\begin{description}[style=nextline,itemsep=5pt]
+\item[\texttt{workflow.load\_example()}] Opens the bundled original scene and packs the original reference images. Save unrelated open work first.
+\item[\texttt{workflow.run(stage, output)}] Runs \texttt{fixed}, \texttt{coarse}, \texttt{refine} or \texttt{compact}. Relative output paths start at the project root. Creates figure outputs without replacing prior saved variants.
+\item[\texttt{apply\_camera\_preset(scene, path, ...)}] Restores pose and framing from JSON; optional target, unit scale, orthographic scale and resolution are described in Step 7.
+\item[\texttt{workflow.update\_reference\_panels(scene, camera)}] Calls \texttt{housing\_corner}, \texttt{silhouette\_edge} and \texttt{place\_panel} for both original panels; see Step 8.
+\item[\texttt{render\_camera\_candidates(scene, directory, ...)}] Renders an angle grid with the panel callback, saves each camera JSON and restores the scene; see Step 9.
+\item[\texttt{measure(image)} and \texttt{rank(directory)}] Measure alpha bounds/coverage and publication footprint, flag invalid previews, and build a ranked comparison; see Step 10. These use ordinary Python with Pillow, not Blender Python.
+\item[\texttt{export(output, stage, ...)}] Writes the fixed or compact SVG pair and dimension report; see Step 12.
+\item[\texttt{create\_envelope} / \texttt{create\_gaussian\_segment}] Create illustrative beam geometry in a collection; see Step 13.
 \end{description}
-\section*{Sources, licenses and editable documentation}
-The agent installation convention is documented at \url{https://developers.openai.com/codex/skills/}. Blender's library preferences are documented at \url{https://docs.blender.org/manual/en/5.4/editors/preferences/asset_libraries.html}. Menu placement varies by version.
+\textbf{Missing import.} Ensure the console bootstrap in Step 6 used your real project root. Scripts run inside Blender need Blender's Python; ranking and export need external Python and Pillow.
 
-Original code uses MIT; original authored models and documentation use CC BY 4.0. See LICENSE and \texttt{docs/provenance.md} for exclusions. See the following section for the library DOI and citation formats.
+\textbf{Existing output error.} Choose a fresh dated folder or a new sweep subdirectory. Do not delete the accepted result to rerun a comparison.
 
-This guide's editable source is \texttt{docs/user-guide.tex}. To rebuild it, run \texttt{pdflatex user-guide.tex} twice from \texttt{docs/}. The example image is \texttt{images/paper-example.png}. The full catalogue is separate; there is no collection index in this guide.
+\textbf{Clipped preview or missing panel.} Check the supplied images and panel callback. Increase the common orthographic scale or canvas dimensions for the whole sweep, then rerun it consistently. Regenerate lettering if framing changes.
+
+\textbf{Background Blender fails.} Run the same \texttt{workflow.run} commands in Blender's Python Console. The functions are identical; a GUI fallback does not require rebuilding the optics. Save results and close the task window after completion.
+
+\textbf{Unexpected scientific interpretation.} Read \texttt{examples/paper-setup/README.md}. P is a circular pupil, L2 is nearest SLM, L1 is nearest CCD, and focal lengths are unknown. Beam widths and mounting geometry are illustrative. The paper supplied the inspiration, not these Blender models.
 
 \clearpage
-\section*{10. How to cite}
+\section*{15. Citation, rights and editable guide}
 When using this library to prepare a figure, cite the project using its stable DOI:
 
 Rodriguez-Lara, B. M. (2026). \textit{Blender Optical Schematics} [Computer software]. Zenodo.\newline
@@ -183,67 +355,5 @@ In your manuscript, use \verb|\cite{rodriguez_lara_2026_optical_schematics}| and
 \textbf{Cite the library for the Blender assets.} Use the library DOI above when using these models. Cite the paper at \url{https://doi.org/10.1103/6ftp-svh8} only when referring to its optical setup or scientific results. Its basic schematic inspired this project; the article contains no Blender model. The models were created afterward and were neither used in nor supplied with the publication. Library citation does not replace the attribution required by CC BY 4.0 for reused models, figures and documentation.
 
 
-\clearpage
-\section*{Reusable POV and propagation accessories}
-The named preset \textbf{Folded Relay --- Front-Left} preserves the accepted orthographic viewing direction. It is stored in
-\path{library/camera-presets/folded-relay-front-left.json}.
-It records position, rotation, target, orthographic scale, clipping planes, resolution and scene units. The reference position is $(-34,-20,40)$, with target $(-3,-1,1.6)$ and orthographic scale $36$ in a scene using $0.01$ metres per Blender unit.
-
-In Blender's Python Console, replace the project path and run:
-\begin{Verbatim}[fontsize=\small]
-import sys
-sys.path.insert(0, '/path/to/project/scripts')
-from camera_presets import apply_camera_preset
-apply_camera_preset(bpy.context.scene)
-\end{Verbatim}
-The helper converts reference distances to the active scene's units. Use \texttt{unit\_scale=1} to replay the coordinates literally. For a table scene, retain the same direction and adjust the framing:
-\begin{Verbatim}[fontsize=\small]
-apply_camera_preset(bpy.context.scene,
-    target=(-0.08, -0.02, 0.04),
-    ortho_scale=0.90, resolution=(2400, 1900))
-\end{Verbatim}
-The target and orthographic scale use destination Blender units. Rebuild camera-facing panels after applying a different camera.
-
-The new collections are:
-\begin{itemize}
-\item \texttt{SO\_Translation\_Rail}: Fixed translation rail; use with independent carriage.
-\item \texttt{SO\_Translation\_Carriage}: Moving carriage; use the same translation transform for the detector and its support.
-\item \texttt{SO\_Quadratic\_Beam\_Envelope}: Translucent quadratic-width beam visualization. Not a diffraction calculation.
-\end{itemize}
-Append these collections and use collection instances. Translate the carriage, detector and detector support together. Keep focal lengths and scene-specific apertures in figure metadata; generic lenses remain shape assets.
-
-The quadratic beam envelope is a geometric illustration, not simulated diffraction. The procedural helper is \path{scripts/beam_envelope.py}. Rejected orders retain the same red hue at reduced brightness. No cable connections or direction arrows are added by default.
-
-For an experimental scene, reuse the existing generic laptop. Align its long edge parallel to the chosen table edge and place supplied CCD and SLM images on its existing display planes. Keep private reference images in the figure source directory, not in the reusable asset files.
-
-Export matching lettered and unlettered SVGs at the requested width (86 mm for one column), with explicit millimetre dimensions and 0.5 mm borders when requested. The optical render is embedded raster; lettering is a separate editable vector layer. See \path{docs/propagation-and-camera.md} for details.
-
-
-\clearpage
-\section*{Optional: search for a compact camera view}
-If a schematic contains too much empty space, ask the agent to compare camera viewpoints. Keep an accepted POV unless you want alternatives. The experimental project's accepted viewpoint is independent of this option.
-
-\textbf{Copy this request into Codex:}
-\begin{quote}
-Search for a more compact orthographic POV for this schematic. Keep optical geometry, component instances and focal spans fixed. Preserve the original figure. Compare a coarse grid of azimuths and elevations, then refine promising views. Re-anchor the camera-facing CCD and SLM panels at every angle. Rank complete views by approximate empty page area at 86 mm width, but reject views that obscure optical faces, merge beam branches or leave insufficient room for readable labels. Show a comparison, save the selected camera as a reusable preset, and export lettered and unlettered SVGs with 0.5 mm borders. Close application windows opened for the task when finished.
-\end{quote}
-
-\textbf{How the search works}
-\begin{enumerate}
-\item Save a separate figure directory. Keep component geometry fixed and render transparent previews with consistent camera scale, resolution and lighting. Re-anchor reference panels for every camera angle.
-\item Compare azimuths and elevations. The reusable Blender helper is \path{scripts/search_camera_views.py}; it restores the original camera, object transforms and render settings after the sweep. A panel-update callback must be supplied for scenes with reference panels.
-\item Run the Pillow-based comparison helper outside Blender:
-\begin{Verbatim}[fontsize=\small]
-python scripts/rank_camera_views.py /path/to/candidates
-\end{Verbatim}
-It produces \texttt{comparison.png} and \texttt{ranked.json}. The metrics are cropped page height, alpha-mask occupied fraction and approximate empty page area at the requested publication width. Empty or clipped renders are flagged as invalid.
-\item Inspect readability before selecting a winner. Check iris and SLM faces, component separation, beam branches, image panels and final lettering. Refine the angle grid around promising candidates. A lower numerical score does not override a readability failure.
-\item Apply the chosen camera JSON through \texttt{apply\_camera\_preset}, re-anchor panels, render at final quality and export the paired SVGs. Keep the original figure and preset.
-\end{enumerate}
-
-\textbf{Included compact preset}
-\path{library/camera-presets/folded-relay-compact-oblique.json} stores \textbf{Folded Relay --- Compact Oblique}, with azimuth $-75^\circ$ and elevation $25^\circ$. Azimuth runs from world $+X$ toward $+Y$; elevation is above the $XY$ plane. In the initial 15-view study, this gave a readable $86\times23.47$ mm figure, compared with an earlier height of $80.58$ mm. These values describe that layout, not a universal or proven global optimum.
-
-Alpha coverage is a proxy that depends on the threshold for glass and translucent beams. Keep all four requested borders, preserve render aspect ratio and check the final lettering. The optical render remains raster inside the SVG; text stays editable. Full examples and parameter meanings are in \path{docs/camera-view-search.md}.
-
+The editable source is \path{docs/user-guide.tex}. Compile twice with \texttt{pdflatex user-guide.tex} from \texttt{docs/}. Original code uses MIT; authored models and documentation use CC BY 4.0, subject to the exclusions in LICENSE and \texttt{docs/provenance.md}. The two original scientific reference images retain their separately documented rights.
 \end{document}

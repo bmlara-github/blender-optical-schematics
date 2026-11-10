@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "view_002",
+  "name": "Az -110, elevation 60",
+  "projection": "ORTHO",
+  "location": [
+    -13.260604858398438,
+    -28.190778732299805,
+    53.5615234375
+  ],
+  "rotation_euler_xyz_radians": [
+    0.5235986709594727,
+    1.009208538960138e-08,
+    -0.3490658700466156
+  ],
+  "rotation_quaternion_wxyz": [
+    0.9512512683868408,
+    0.2548869550228119,
+    -0.044943444430828094,
+    -0.16773127019405365
+  ],
+  "target": [
+    -3.0,
+    0.0,
+    1.600000023841858
+  ],
+  "offset_from_target": [
+    -10.260604858398438,
+    -28.190778732299805,
+    51.961524963378906
+  ],
+  "orthographic_scale": 44,
+  "lens_mm": 50.0,
+  "clip_start": 0.10000000149011612,
+  "clip_end": 1000.0,
+  "reference_meters_per_blender_unit": 0.009999999776482582,
+  "resolution": [
+    1000,
+    800
+  ],
+  "pixel_aspect": [
+    1,
+    1
+  ],
+  "azimuth_deg": -110,
+  "elevation_deg": 60
+}

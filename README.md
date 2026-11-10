@@ -58,3 +58,5 @@ The **Folded Relay — Front-Left** camera preset and three propagation accessor
 ## Optional camera-view search
 
 Ask the agent to compare camera angles when a schematic contains too much empty space. The [camera-view search workflow](docs/camera-view-search.md) supplies preview rendering, a ranked comparison and readability checks. It preserves the original figure and includes the **Folded Relay — Compact Oblique** preset. See the [user guide](docs/user-guide.pdf) for a copyable request.
+
+The [step-by-step user guide](docs/user-guide.pdf) uses the original [paper setup](examples/paper-setup/README.md) throughout, including the saved fixed POV, 15-view sampler and paired SVG export.

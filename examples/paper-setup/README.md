@@ -2,11 +2,37 @@
 
 Scientific reference: https://doi.org/10.1103/6ftp-svh8 (provided by the author). This is a **later 3D reconstruction**. The paper did not use these Blender models. The article DOI is not the DOI of this library.
 
-## Run through the agent
+## One example, end to end
 
-Open this repository with an agent that can read local files and run Blender. Paste [prompt.md](prompt.md), or ask it to read that file and execute the request. Use `$setup-to-blender`; if discovery is unavailable, ask it to read `agent/setup-to-blender/SKILL.md` explicitly. The skill is an instruction package, not an autonomous executable or image-recognition program.
+Follow the [existing user guide](../../docs/user-guide.pdf), steps 1–15. Every illustration uses this original nine-component setup and these same two reference images.
 
-The agent writes a new Blender build script from the documented plan and library assets, runs it, exports the figures, and checks the result. No files from the full private working copy are required. Blender and a Python interpreter are required; Pillow is useful for PNG lettering previews. The library files were prepared in Blender 5.2.3 LTS.
+Open `source.blend` for the saved starting scene. `workflow.py` runs the fixed, coarse, refine and compact stages through the existing library helpers. `export.py` exports 86 mm paired SVGs with 0.5 mm borders. `expected/` contains the verified renders, all 15 camera candidates, camera JSON files, rankings and SVG pairs.
+
+In Blender's Python Console, set `ROOT` to the repository and choose a new dated output folder, then run:
+
+```python
+import sys
+from pathlib import Path
+ROOT = Path('/absolute/path/to/blender-optical-schematics')
+sys.path.insert(0, str(ROOT / 'examples/paper-setup'))
+import workflow
+OUT = ROOT / 'Figures/2026-11-10-FIg01'  # use today's date and a new number
+workflow.run('fixed', OUT)
+workflow.run('coarse', OUT)
+workflow.run('refine', OUT)
+workflow.run('compact', OUT)
+```
+
+Outside Blender, from the repository root:
+
+```sh
+python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/coarse
+python scripts/rank_camera_views.py Figures/2026-11-10-FIg01/refine
+python examples/paper-setup/export.py Figures/2026-11-10-FIg01 fixed
+python examples/paper-setup/export.py Figures/2026-11-10-FIg01 compact
+```
+
+The compact stage demonstrates applying an alternative preset, not an automatic optimum. It shows the back of the SLM; retain the fixed view when visibility of its active face is required. The guide explains this tradeoff. The source uses library surface beam envelopes for visibility on white; hidden original volume envelopes remain in the scene. Neither is a diffraction calculation.
 
 ## Inputs
 

@@ -1,0 +1,116 @@
+[
+  {
+    "id": "view_000",
+    "image": "view_000.png",
+    "preset": "view_000.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 15,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      209,
+      326,
+      870,
+      460
+    ],
+    "occupied_fraction": 0.36134757378011606,
+    "empty_fraction": 0.6386524262198839,
+    "height_mm": 18.23146747352496,
+    "approximate_empty_area_mm2": 935.4180732901372
+  },
+  {
+    "id": "view_003",
+    "image": "view_003.png",
+    "preset": "view_003.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 15,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      177,
+      299,
+      840,
+      478
+    ],
+    "occupied_fraction": 0.29432830287250267,
+    "empty_fraction": 0.7056716971274973,
+    "height_mm": 23.94871794871795,
+    "approximate_empty_area_mm2": 1376.5121630506246
+  },
+  {
+    "id": "view_001",
+    "image": "view_001.png",
+    "preset": "view_001.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 25,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      208,
+      292,
+      870,
+      486
+    ],
+    "occupied_fraction": 0.26315912417852805,
+    "empty_fraction": 0.736840875821472,
+    "height_mm": 25.909365558912388,
+    "approximate_empty_area_mm2": 1560.1102924398283
+  },
+  {
+    "id": "view_002",
+    "image": "view_002.png",
+    "preset": "view_002.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 35,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      209,
+      261,
+      870,
+      509
+    ],
+    "occupied_fraction": 0.21069615928944416,
+    "empty_fraction": 0.7893038407105558,
+    "height_mm": 32.8910741301059,
+    "approximate_empty_area_mm2": 2139.598520098599
+  },
+  {
+    "id": "view_004",
+    "image": "view_004.png",
+    "preset": "view_004.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 25,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      177,
+      247,
+      840,
+      507
+    ],
+    "occupied_fraction": 0.20927021696252465,
+    "empty_fraction": 0.7907297830374753,
+    "height_mm": 34.333333333333336,
+    "approximate_empty_area_mm2": 2240.4010519395133
+  },
+  {
+    "id": "view_005",
+    "image": "view_005.png",
+    "preset": "view_005.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 35,
+    "empty": false,
+    "clipped": false,
+    "bounds_px": [
+      177,
+      200,
+      840,
+      533
+    ],
+    "occupied_fraction": 0.16585363644187173,
+    "empty_fraction": 0.8341463635581283,
+    "height_mm": 43.69230769230769,
+    "approximate_empty_area_mm2": 3026.9888231426694
+  }
+]

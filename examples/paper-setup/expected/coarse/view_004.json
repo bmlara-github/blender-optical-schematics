@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "view_004",
+  "name": "Az -90, elevation 45",
+  "projection": "ORTHO",
+  "location": [
+    -3.0,
+    -42.42640686035156,
+    44.026405334472656
+  ],
+  "rotation_euler_xyz_radians": [
+    0.7853981852531433,
+    2.8876217936874402e-24,
+    6.123234262925839e-17
+  ],
+  "rotation_quaternion_wxyz": [
+    0.9238795042037964,
+    0.3826834559440613,
+    1.1716302828667454e-17,
+    2.8285652804487595e-17
+  ],
+  "target": [
+    -3.0,
+    0.0,
+    1.600000023841858
+  ],
+  "offset_from_target": [
+    2.597868260437305e-15,
+    -42.42640686035156,
+    42.42640686035156
+  ],
+  "orthographic_scale": 44,
+  "lens_mm": 50.0,
+  "clip_start": 0.10000000149011612,
+  "clip_end": 1000.0,
+  "reference_meters_per_blender_unit": 0.009999999776482582,
+  "resolution": [
+    1000,
+    800
+  ],
+  "pixel_aspect": [
+    1,
+    1
+  ],
+  "azimuth_deg": -90,
+  "elevation_deg": 45
+}

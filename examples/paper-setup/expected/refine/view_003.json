@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "view_003",
+  "name": "Az -75, elevation 15",
+  "projection": "ORTHO",
+  "location": [
+    12.0,
+    -55.98076248168945,
+    17.12914276123047
+  ],
+  "rotation_euler_xyz_radians": [
+    1.3089970350265503,
+    3.892322908427559e-09,
+    0.26179948449134827
+  ],
+  "rotation_quaternion_wxyz": [
+    0.7865660786628723,
+    0.6035534143447876,
+    0.07945934683084488,
+    0.1035534217953682
+  ],
+  "target": [
+    -3.0,
+    0.0,
+    1.600000023841858
+  ],
+  "offset_from_target": [
+    15.0,
+    -55.98076248168945,
+    15.529142379760742
+  ],
+  "orthographic_scale": 44,
+  "lens_mm": 50.0,
+  "clip_start": 0.10000000149011612,
+  "clip_end": 1000.0,
+  "reference_meters_per_blender_unit": 0.009999999776482582,
+  "resolution": [
+    1000,
+    800
+  ],
+  "pixel_aspect": [
+    1,
+    1
+  ],
+  "azimuth_deg": -75,
+  "elevation_deg": 15
+}
