@@ -1,5 +1,5 @@
 {
-  "asset_count": 23,
+  "asset_count": 26,
   "assets": [
     {
       "index": 1,
@@ -138,6 +138,30 @@
       "collection": "SO_Collimator",
       "library": "Bllas_Schematic_Optics_Additions_v04.blend",
       "description": "Generic mounted positive-lens collimator with graphite barrel, metal collars and recessed glass. Output along local -Y; focal length is scene-defined."
+    },
+    {
+      "collection": "SO_Translation_Rail",
+      "library": "Bllas_Schematic_Optics_Translation.blend",
+      "description": "Fixed translation rail; use with independent carriage.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 24
+    },
+    {
+      "collection": "SO_Translation_Carriage",
+      "library": "Bllas_Schematic_Optics_Translation.blend",
+      "description": "Moving carriage; use the same translation transform for the detector and its support.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 25
+    },
+    {
+      "collection": "SO_Quadratic_Beam_Envelope",
+      "library": "Bllas_Schematic_Optics_Beam_Envelope.blend",
+      "description": "Translucent quadratic-width beam visualization. Not a diffraction calculation.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 26
     }
   ]
 }

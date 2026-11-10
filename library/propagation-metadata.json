@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "collection": "SO_Translation_Rail",
+      "library": "Bllas_Schematic_Optics_Translation.blend",
+      "description": "Fixed translation rail; use with independent carriage.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 24
+    },
+    {
+      "collection": "SO_Translation_Carriage",
+      "library": "Bllas_Schematic_Optics_Translation.blend",
+      "description": "Moving carriage; use the same translation transform for the detector and its support.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 25
+    },
+    {
+      "collection": "SO_Quadratic_Beam_Envelope",
+      "library": "Bllas_Schematic_Optics_Beam_Envelope.blend",
+      "description": "Translucent quadratic-width beam visualization. Not a diffraction calculation.",
+      "meters_per_blender_unit": 0.01,
+      "axis": "+Y",
+      "index": 26
+    }
+  ],
+  "camera_presets": [
+    "camera-presets/folded-relay-front-left.json"
+  ]
+}

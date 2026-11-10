@@ -50,3 +50,7 @@ Use the included [setup-to-Blender agent](agent/setup-to-blender/SKILL.md) and p
 Start with the [step-by-step guide](docs/user-guide.pdf). Keep the [agent folder](agent/README.md) beside library/. You can call the agent directly by asking Codex to read agent/setup-to-blender/SKILL.md and execute examples/paper-setup/prompt.md. No hidden-folder installation is needed for this direct call. The optional agent/install.py installs a named skill for this project only.
 
 ![Paper-setup reconstruction preview](images/paper-example.png)
+
+## Reusable POV and propagation accessories
+
+The **Folded Relay — Front-Left** camera preset and three propagation accessories are included. See [camera and accessory instructions](docs/propagation-and-camera.md) and the updated [user guide](docs/user-guide.pdf). The asset manifest now lists 26 collections.
