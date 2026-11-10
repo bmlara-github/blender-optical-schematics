@@ -6,7 +6,7 @@ def create_gaussian_segment(name,start,end,wa,wb,collection,optical_height=0,rej
     a=Vector((start[0],start[1],optical_height)); b=Vector((end[0],end[1],optical_height)); length=(b-a).length
     limit=max(wa,wb)*2.5
     bpy.ops.mesh.primitive_cylinder_add(vertices=64,radius=limit,depth=length,location=(a+b)/2)
-    o=bpy.context.object; o.name=name
+    o=bpy.context.view_layer.objects.active; o.name=name
     for c in list(o.users_collection): c.objects.unlink(o)
     collection.objects.link(o)
     o.rotation_euler=(b-a).to_track_quat('Z','Y').to_euler()

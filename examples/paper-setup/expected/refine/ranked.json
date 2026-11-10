@@ -8,15 +8,15 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      209,
-      326,
-      870,
-      460
+      135,
+      318,
+      874,
+      462
     ],
-    "occupied_fraction": 0.36134757378011606,
-    "empty_fraction": 0.6386524262198839,
-    "height_mm": 18.23146747352496,
-    "approximate_empty_area_mm2": 935.4180732901372
+    "occupied_fraction": 0.3226394527138776,
+    "empty_fraction": 0.6773605472861224,
+    "height_mm": 17.56292286874154,
+    "approximate_empty_area_mm2": 953.6209924174312
   },
   {
     "id": "view_003",
@@ -27,15 +27,15 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      177,
-      299,
-      840,
+      150,
+      282,
+      843,
       478
     ],
-    "occupied_fraction": 0.29432830287250267,
-    "empty_fraction": 0.7056716971274973,
-    "height_mm": 23.94871794871795,
-    "approximate_empty_area_mm2": 1376.5121630506246
+    "occupied_fraction": 0.27462673381040725,
+    "empty_fraction": 0.7253732661895927,
+    "height_mm": 25.04040404040404,
+    "approximate_empty_area_mm2": 1482.2526439409557
   },
   {
     "id": "view_001",
@@ -46,15 +46,15 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      208,
-      292,
-      870,
-      486
+      135,
+      279,
+      874,
+      489
     ],
-    "occupied_fraction": 0.26315912417852805,
-    "empty_fraction": 0.736840875821472,
-    "height_mm": 25.909365558912388,
-    "approximate_empty_area_mm2": 1560.1102924398283
+    "occupied_fraction": 0.22911270056060312,
+    "empty_fraction": 0.7708872994393969,
+    "height_mm": 25.15426251691475,
+    "approximate_empty_area_mm2": 1582.7182071372463
   },
   {
     "id": "view_002",
@@ -65,15 +65,15 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      209,
-      261,
-      870,
-      509
+      135,
+      244,
+      874,
+      513
     ],
-    "occupied_fraction": 0.21069615928944416,
-    "empty_fraction": 0.7893038407105558,
-    "height_mm": 32.8910741301059,
-    "approximate_empty_area_mm2": 2139.598520098599
+    "occupied_fraction": 0.1821762554642816,
+    "empty_fraction": 0.8178237445357184,
+    "height_mm": 31.9404600811908,
+    "approximate_empty_area_mm2": 2150.8266483068774
   },
   {
     "id": "view_004",
@@ -84,15 +84,15 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      177,
-      247,
-      840,
-      507
+      150,
+      221,
+      843,
+      508
     ],
-    "occupied_fraction": 0.20927021696252465,
-    "empty_fraction": 0.7907297830374753,
-    "height_mm": 34.333333333333336,
-    "approximate_empty_area_mm2": 2240.4010519395133
+    "occupied_fraction": 0.1929096841988828,
+    "empty_fraction": 0.8070903158011172,
+    "height_mm": 36.2020202020202,
+    "approximate_empty_area_mm2": 2414.9528161432922
   },
   {
     "id": "view_005",
@@ -103,14 +103,14 @@
     "empty": false,
     "clipped": false,
     "bounds_px": [
-      177,
-      200,
-      840,
-      533
+      150,
+      164,
+      843,
+      534
     ],
-    "occupied_fraction": 0.16585363644187173,
-    "empty_fraction": 0.8341463635581283,
-    "height_mm": 43.69230769230769,
-    "approximate_empty_area_mm2": 3026.9888231426694
+    "occupied_fraction": 0.15116415116415116,
+    "empty_fraction": 0.8488358488358488,
+    "height_mm": 46.38239538239538,
+    "approximate_empty_area_mm2": 3274.387349062674
   }
 ]

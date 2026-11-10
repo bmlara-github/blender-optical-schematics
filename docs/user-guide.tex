@@ -92,9 +92,11 @@ The dot-prefixed \texttt{.agents} folder is normally hidden. Keep the visible \t
 
 \clearpage
 \section*{6. Open the one example used throughout this guide}
-We keep the original setup: Laser, circular pupil P, L1P, L2P, reflective SLM, L2, spatial filter SF, L1 and CCD. The selected order passes SF; the rejected orders stop there. Focal lengths are unspecified.
+We keep the original setup: Laser, collimator, pinhole P, L1P, L2P, reflective SLM, L2, adjustable iris SF, L1 and CCD. The selected order passes SF; the rejected orders stop there. Physical focal lengths are unspecified. The pinhole is imaged onto the SLM with schematic spans $5,10,5$ BU (object--lens, lens--lens, lens--image), giving unit-magnitude inversion. The return relay uses the same spans, with SF in its common focal plane.
 
-The folder \path{examples/paper-setup/} now contains \texttt{source.blend}, \texttt{workflow.py}, \texttt{export.py}, the two original reference images, and \texttt{expected/}. The bundled scene is the exact starting point for every illustration below. The older \texttt{layout.json} remains an approximate authoring plan; it is not an executable scene or a replacement for these saved transforms.
+The asset audit confirms that P uses \texttt{SO\_Pinhole}, SF uses \texttt{SO\_Iris}, and the collimator uses \texttt{SO\_Collimator}. The saved scene embeds these current assets.
+
+The folder \path{examples/paper-setup/} now contains \texttt{source.blend}, \texttt{workflow.py}, \texttt{export.py}, the two original reference images, and \texttt{expected/}. The bundled scene is the exact starting point for every illustration below. The updated \texttt{layout.json} records optical-plane positions and the two validated 4F relays; instrument origins can differ from their active planes.
 
 \textbf{In Codex, the no-code route.} Paste:
 \begin{quote}
@@ -127,7 +129,7 @@ This opens the original scene, reloads and packs its two bundled images, applies
 \begin{center}
 \includegraphics[width=110mm,height=100mm,keepaspectratio]{../images/camera-walkthrough/fixed.png}
 \end{center}
-\textbf{Fixed-view checkpoint.} Your output should show these same nine labeled components and the same two data images. This is your fixed viewing direction applied to the original example. The camera position is $(-34,-20,40)$ and target $(-3,-1,1.6)$. Orthographic scale 44 fits this original setup; it changes framing without changing the viewing direction. Rendering uses $2400\times1800$ pixels.
+\textbf{Fixed-view checkpoint.} Your output should show these same ten labeled components and the same two data images. This is your fixed viewing direction applied to the original example. The camera position is $(-34,-20,40)$ and target $(-3,-1,1.6)$. Orthographic scale 44 fits this original setup; it changes framing without changing the viewing direction. Rendering uses $2400\times1800$ pixels.
 
 \textbf{The underlying function.} The wrapper calls:
 \begin{Verbatim}[fontsize=\small]
@@ -214,7 +216,7 @@ This tests azimuths $(-105,-75)^\circ$ and elevations $(15,25,35)^\circ$. The pa
 \begin{center}
 \includegraphics[width=\linewidth]{../images/camera-walkthrough/refined.png}
 \end{center}
-\textbf{Checkpoint.} Compare both samplers. Check the SLM face, pupil and filter, all four lenses, separation of the beam branches, image panels and room for labels. A numerically smaller view may make an aperture edge-on or hide a lens. Inspect before choosing. The bundled samplers are under \path{examples/paper-setup/expected/}; they are previews of this original example, not of a different relay.
+\textbf{Checkpoint.} Compare both samplers. Check the SLM face, pinhole and iris, all four lenses, separation of the beam branches, image panels and room for labels. A numerically smaller view may make an aperture edge-on or hide a lens. Inspect before choosing. The bundled samplers are under \path{examples/paper-setup/expected/}; they are previews of this original example, not of a different relay.
 
 \clearpage
 \section*{11. Apply and save the selected POV}
@@ -240,7 +242,7 @@ Read that JSON's azimuth and elevation before choosing it. Save a separate Blend
 \par\textbf{Readability check.} This alternative shows the back of the SLM. Keep the fixed view when the active face must be visible. This is a demonstration of applying a candidate, not a claim of an optimal view.
 \clearpage
 \section*{11a. Restore the beams and illuminate the chosen view}
-Choose and save the camera first. Keep that camera and the component positions fixed while finishing the appearance. The preceding samplers compare composition; their solid beam override is not the final beam style.
+Choose and save the camera first. Keep that camera and the component positions fixed while finishing the appearance. The preceding samplers compare composition with the restored translucent beams; finish the lighting after choosing the camera.
 
 \textbf{Apply the finishing step.} In the same Blender console, after Step 11:
 \begin{Verbatim}[fontsize=\small]
@@ -332,7 +334,7 @@ The bundled scene uses collection instances from the schematic library. Select a
 
 \textbf{Reference-image replacement.} To try your own data while keeping this example, copy \texttt{examples/paper-setup/} to a separate project copy, replace \path{reference-images/slm_hologram.png} and \texttt{ccd\_intensity.png}, and run the workflow into a new output folder. \texttt{load\_example()} reloads these files and packs them; \texttt{update\_reference\_panels()} updates alignment. Do not invent missing data images.
 
-\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. The camera-search previews use a surface-envelope override. Steps 11a--11b restore the approved translucent envelope and shaded core for the final publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
+\textbf{Beam representations.} The original scene retains its Gaussian-volume geometry. The camera-search previews use the restored translucent envelopes and shaded cores. Steps 11a--11b restore the approved translucent envelope and shaded core for the final publication render. Paths and endpoints are unchanged. Both representations are illustrations rather than simulations.
 
 The functions used for these two representations are:
 \begin{Verbatim}[fontsize=\small]
@@ -343,7 +345,7 @@ To experiment in a separate scene copy, select one existing beam segment, record
 \begin{Verbatim}[fontsize=\small]
 c = bpy.data.collections.new('Beam style trial')
 bpy.context.scene.collection.children.link(c)
-a, b = (-3.6, 4.7, 1.6), (0.2, 1.85, 1.6)
+a, b = (-4, 5, 1.6), (0, 2, 1.6)
 beam = create_envelope('Input relay trial',
     a, b, .18, .018, c)
 \end{Verbatim}
@@ -372,7 +374,7 @@ This optional style exercise still uses the same optical setup. Translation acce
 
 \textbf{Background Blender fails.} Run the same \texttt{workflow.run} commands in Blender's Python Console. The functions are identical; a GUI fallback does not require rebuilding the optics. Save results and close the task window after completion.
 
-\textbf{Unexpected scientific interpretation.} Read \texttt{examples/paper-setup/README.md}. P is a circular pupil, L2 is nearest SLM, L1 is nearest CCD, and focal lengths are unknown. Beam widths and mounting geometry are illustrative. The paper supplied the inspiration, not these Blender models.
+\textbf{Unexpected scientific interpretation.} Read \texttt{examples/paper-setup/README.md}. P is a pinhole, L2 is nearest SLM, L1 is nearest CCD, and focal lengths are unknown. Beam widths and mounting geometry are illustrative. The paper supplied the inspiration, not these Blender models.
 
 \clearpage
 \section*{15. Citation, rights and editable guide}

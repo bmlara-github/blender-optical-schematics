@@ -1,48 +1,22 @@
 {
-  "fixed": {
-    "camera_and_optics_unchanged": true,
-    "active_lights": 3,
-    "cores": 13,
-    "repeat_call_does_not_duplicate": true,
-    "light_positions": {
-      "Camera studio Key": [
-        -11.154952049255371,
-        9.076377868652344,
-        24.29616928100586
-      ],
-      "Camera studio Fill": [
-        0.37693309783935547,
-        -14.350603103637695,
-        13.751399040222168
-      ],
-      "Camera studio Rim": [
-        12.381574630737305,
-        4.735887050628662,
-        2.589210033416748
-      ]
-    }
-  },
-  "compact": {
-    "camera_and_optics_unchanged": true,
-    "active_lights": 3,
-    "cores": 13,
-    "repeat_call_does_not_duplicate": true,
-    "light_positions": {
-      "Camera studio Key": [
-        -11.900197982788086,
-        -13.148452758789062,
-        21.895437240600586
-      ],
-      "Camera studio Fill": [
-        12.790891647338867,
-        -4.8405585289001465,
-        11.202957153320312
-      ],
-      "Camera studio Rim": [
-        -2.7945737838745117,
-        14.688151359558105,
-        8.249515533447266
-      ]
-    }
-  }
+  "input_spans_BU": [
+    5.0,
+    10.0,
+    5.0
+  ],
+  "return_spans_BU": [
+    5.0,
+    10.0,
+    5.0
+  ],
+  "pinhole_asset": "SO_Pinhole",
+  "iris_asset": "SO_Iris.001",
+  "selected_clear": true,
+  "rejected_blocked": [
+    true,
+    true
+  ],
+  "pinhole_center_clear": true,
+  "magnification": -1,
+  "focal_lengths": "Equal 5 BU schematic spans; no physical focal length specified"
 }

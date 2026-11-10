@@ -1,0 +1,13 @@
+{
+  "target": [
+    -3.0,
+    0.0,
+    1.600000023841858
+  ],
+  "key_W": 3300,
+  "fill_W": 1100,
+  "rim_W": 2200,
+  "world_strength": 0.25,
+  "beam_style": "approved transparent envelope mix",
+  "lighting_frame": "camera right/up/front; schematic Blender units"
+}

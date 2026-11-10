@@ -1,0 +1,22 @@
+{
+  "input_spans_BU": [
+    5.0,
+    10.0,
+    5.0
+  ],
+  "return_spans_BU": [
+    5.0,
+    10.0,
+    5.0
+  ],
+  "pinhole_asset": "SO_Pinhole",
+  "iris_asset": "SO_Iris.001",
+  "selected_clear": true,
+  "rejected_blocked": [
+    true,
+    true
+  ],
+  "pinhole_center_clear": true,
+  "magnification": -1,
+  "focal_lengths": "Equal 5 BU schematic spans; no physical focal length specified"
+}

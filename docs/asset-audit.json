@@ -1,0 +1,214 @@
+{
+  "blender-optical-schematics": {
+    "SO_Iris": {
+      "parts": [
+        "Iris housing",
+        "Iris front rim",
+        "Open diaphragm",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Iris adjustment tab"
+      ],
+      "geometry_sha256": "a0f8863b2bb320237f9e51a1dd05c52ebaf29dde89ca05d8c463a0a6eb5671cd"
+    },
+    "SO_Pinhole": {
+      "parts": [
+        "Pinhole plate",
+        "Protective rim"
+      ],
+      "geometry_sha256": "70019bf06eb3a49352978c561715c64e3f6457f27a5f4e6bd0dc4a9023866e36"
+    }
+  },
+  "GitHub/blender-optical-schematics": {
+    "SO_Iris": {
+      "parts": [
+        "Iris housing",
+        "Iris front rim",
+        "Open diaphragm",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Blade seam",
+        "Iris adjustment tab"
+      ],
+      "geometry_sha256": "a0f8863b2bb320237f9e51a1dd05c52ebaf29dde89ca05d8c463a0a6eb5671cd"
+    },
+    "SO_Pinhole": {
+      "parts": [
+        "Pinhole plate",
+        "Protective rim"
+      ],
+      "geometry_sha256": "70019bf06eb3a49352978c561715c64e3f6457f27a5f4e6bd0dc4a9023866e36"
+    }
+  },
+  "GitHub/blender-optical-schematics/examples/paper-setup/source.blend": {
+    "Laser": {
+      "asset": "SO_Laser",
+      "position": [
+        -11.200000762939453,
+        10.40000057220459,
+        1.600000023841858
+      ]
+    },
+    "L1P": {
+      "asset": "SO_Biconvex",
+      "position": [
+        -3.6000003814697266,
+        4.700000762939453,
+        1.600000023841858
+      ]
+    },
+    "L2P": {
+      "asset": "SO_Biconvex",
+      "position": [
+        4.0,
+        -1.0,
+        1.600000023841858
+      ]
+    },
+    "L2": {
+      "asset": "SO_Biconvex",
+      "position": [
+        2.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "L1": {
+      "asset": "SO_Biconvex",
+      "position": [
+        -7.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "CCD": {
+      "asset": "SO_CCD_Camera",
+      "position": [
+        -11.25,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "SLM": {
+      "asset": "SO_SLM",
+      "position": [
+        8.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "P": {
+      "asset": "SO_Figure_Circular_Pupil",
+      "position": [
+        -7.199999809265137,
+        7.40000057220459,
+        1.600000023841858
+      ]
+    },
+    "SF": {
+      "asset": "SO_Spatial_Filter_Mask",
+      "position": [
+        -3.0,
+        -4.849999904632568,
+        1.600000023841858
+      ]
+    }
+  },
+  "blender-optical-schematics/Figures/2026-11-05-FIg01/2026-11-05-FIg01_collimator_pov.blend": {
+    "Laser source": {
+      "asset": "SO_Laser",
+      "position": [
+        -14.0,
+        12.5,
+        1.600000023841858
+      ]
+    },
+    "L1P": {
+      "asset": "SO_Biconvex",
+      "position": [
+        -4.0,
+        5.0,
+        1.600000023841858
+      ]
+    },
+    "L2P": {
+      "asset": "SO_Biconvex",
+      "position": [
+        4.0,
+        -1.0,
+        1.600000023841858
+      ]
+    },
+    "L2 \u2022 label preserved from PDF": {
+      "asset": "SO_Biconvex",
+      "position": [
+        3.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "L1 \u2022 label preserved from PDF": {
+      "asset": "SO_Biconvex",
+      "position": [
+        -7.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "CCD": {
+      "asset": "SO_CCD_Camera",
+      "position": [
+        -12.470800399780273,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "SLM": {
+      "asset": "SO_SLM",
+      "position": [
+        8.162320137023926,
+        -4.054106712341309,
+        1.600000023841858
+      ]
+    },
+    "P \u2022 circular pupil": {
+      "asset": "SO_Figure_Circular_Pupil",
+      "position": [
+        -8.0,
+        8.0,
+        1.600000023841858
+      ]
+    },
+    "SF \u2022 reusable spatial filter": {
+      "asset": "SO_Iris.001",
+      "position": [
+        -2.0,
+        -4.0,
+        1.600000023841858
+      ]
+    },
+    "Collimator": {
+      "asset": "SO_Collimator",
+      "position": [
+        -10.064000129699707,
+        9.54800033569336,
+        1.600000023841858
+      ]
+    }
+  }
+}

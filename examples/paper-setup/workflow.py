@@ -69,7 +69,7 @@ def run(stage,output):
     scene.cycles.samples=64
     scene.render.filepath=str(out/'renders'/(stage+'.png'))
     anchors=[]
-    for name in ['Laser','P','L1P','L2P','SLM','L2','SF','L1','CCD']:
+    for name in ['Laser','Collimator','P','L1P','L2P','SLM','L2','SF','L1','CCD']:
         p=world_to_camera_view(scene,camera,bpy.data.objects[name].location)
         anchors.append(dict(name=name,x=p.x*scene.render.resolution_x,
                             y=(1-p.y)*scene.render.resolution_y))

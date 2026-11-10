@@ -4,7 +4,7 @@ Scientific reference: https://doi.org/10.1103/6ftp-svh8 (provided by the author)
 
 ## One example, end to end
 
-Follow the [existing user guide](../../docs/user-guide.pdf), steps 1–15. Every illustration uses this original nine-component setup and these same two reference images.
+Follow the [existing user guide](../../docs/user-guide.pdf), steps 1–15. Every illustration uses this original example updated with the collimator, pinhole and adjustable iris and these same two reference images.
 
 Open `source.blend` for the saved starting scene. `workflow.py` runs the fixed, coarse, refine and compact stages through the existing library helpers. `export.py` exports 86 mm paired SVGs with 0.5 mm borders. `expected/` contains the verified renders, all 15 camera candidates, camera JSON files, rankings and SVG pairs.
 
@@ -36,9 +36,9 @@ The compact stage demonstrates applying an alternative preset, not an automatic 
 
 ## Inputs
 
-[layout.json](layout.json) is an authoring plan, not input to an included fixed scene-builder executable. It provides the component list, collection IDs, library files, assumed coordinates and beam routes. The agent must write its build script and verify collection axes and aperture alignment. The order is Laser, P, L1P, L2P, SLM, L2, SF, L1, CCD. P is a circular pupil. SF selects +1; other orders terminate at its mask.
+[layout.json](layout.json) is an authoring plan, not input to an included fixed scene-builder executable. It provides the component list, collection IDs, library files, assumed coordinates and beam routes. The agent must write its build script and verify collection axes and aperture alignment. The order is Laser, Collimator, P, L1P, L2P, SLM, L2, SF, L1, CCD. P is a pinhole (SO_Pinhole), imaged on the SLM by L1P/L2P. SF is the current adjustable iris (SO_Iris); it passes +1 and blocks the rejected orders.
 
-The source figure was identified locally as manuscript Figure 6. The drawn labels put L2 nearest SLM and L1 nearest CCD; previous source notes report conflicting prose. Preserve the figure labels unless the user resolves the discrepancy. Focal lengths and physical separations were not supplied. The experimental 4 mm pupil, 1 mm filter and 120 mm optical height are authored assumptions. Schematic scale/spacing is illustrative.
+The source figure was identified locally as manuscript Figure 6. The drawn labels put L2 nearest SLM and L1 nearest CCD; previous source notes report conflicting prose. Preserve the figure labels unless the user resolves the discrepancy. Focal lengths and physical separations were not supplied. No experimental aperture diameter is assigned by this example. Schematic scale/spacing is illustrative.
 
 The two images in [reference-images/](reference-images/) are included for the default example: the hologram goes beside SLM and the recorded intensity beside CCD. Their existing rights are documented separately; they are not Blender simulation outputs. The full paper PDF is not included. Supply a lawful sketch for an actual comparison with the complete original drawing. Without it, report that no full-sketch visual check was performed. Both panels must remain visible in both camera views, with no cable-like connectors.
 
@@ -47,3 +47,5 @@ The two images in [reference-images/](reference-images/) are included for the de
 A new dated figure folder containing build.py, setup.json, the Blender scene, two clean renders, paired SVGs with and without editable lettering, and a README/report. SVG optics remain raster, with vector lettering in a separate layer. Gaussian envelopes are display geometry, not simulated diffraction. Mechanical fits are not certified.
 
 After selecting the POV, follow [the finishing steps](../../docs/scene-finishing.md) to restore the translucent beams and position studio illumination relative to the camera.
+
+Asset audit: local and published SO_Iris and SO_Pinhole geometry match; see `../../docs/asset-audit.json`. The saved scene now uses those assets plus SO_Collimator. `scene-validation.json` verifies both 5/10/5 BU relays, the open pinhole center, and iris rejection. Historical dated figure folders preserve earlier versions; this bundled source and expected/ are the current example.

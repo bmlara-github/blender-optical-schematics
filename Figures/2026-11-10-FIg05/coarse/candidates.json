@@ -1,0 +1,65 @@
+[
+  {
+    "id": "view_000",
+    "image": "view_000.png",
+    "preset": "view_000.json",
+    "azimuth_deg": -110,
+    "elevation_deg": 30
+  },
+  {
+    "id": "view_001",
+    "image": "view_001.png",
+    "preset": "view_001.json",
+    "azimuth_deg": -110,
+    "elevation_deg": 45
+  },
+  {
+    "id": "view_002",
+    "image": "view_002.png",
+    "preset": "view_002.json",
+    "azimuth_deg": -110,
+    "elevation_deg": 60
+  },
+  {
+    "id": "view_003",
+    "image": "view_003.png",
+    "preset": "view_003.json",
+    "azimuth_deg": -90,
+    "elevation_deg": 30
+  },
+  {
+    "id": "view_004",
+    "image": "view_004.png",
+    "preset": "view_004.json",
+    "azimuth_deg": -90,
+    "elevation_deg": 45
+  },
+  {
+    "id": "view_005",
+    "image": "view_005.png",
+    "preset": "view_005.json",
+    "azimuth_deg": -90,
+    "elevation_deg": 60
+  },
+  {
+    "id": "view_006",
+    "image": "view_006.png",
+    "preset": "view_006.json",
+    "azimuth_deg": -70,
+    "elevation_deg": 30
+  },
+  {
+    "id": "view_007",
+    "image": "view_007.png",
+    "preset": "view_007.json",
+    "azimuth_deg": -70,
+    "elevation_deg": 45
+  },
+  {
+    "id": "view_008",
+    "image": "view_008.png",
+    "preset": "view_008.json",
+    "azimuth_deg": -70,
+    "elevation_deg": 60
+  }
+]

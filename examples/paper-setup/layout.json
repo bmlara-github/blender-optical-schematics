@@ -1,13 +1,13 @@
 {
-  "format": "agent-authoring-plan-v1",
+  "format": "agent-authoring-plan-v2",
   "style": "schematic",
   "manuscript_doi": "10.1103/6ftp-svh8",
-  "relationship": "Later 3D reconstruction of the paper setup. These Blender models were not used in the paper.",
+  "relationship": "Later reconstruction, updated with collimator, pinhole and adjustable iris; not models supplied with the paper",
   "coordinate_units": "schematic Blender units",
   "meters_per_blender_unit": 0.01,
-  "optical_height": 1.6,
   "optical_sequence": [
     "Laser",
+    "Collimator",
     "P",
     "L1P",
     "L2P",
@@ -22,27 +22,32 @@
       "label": "Laser",
       "collection": "SO_Laser",
       "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        -10.98,
-        10.935
+      "optical_plane_position": [
+        -14,
+        12.5,
+        1.6
       ],
-      "experimental_normal_xy_reference": [
-        0.800000011920929,
-        -0.6000000238418579
+      "focal_length_mm": null
+    },
+    {
+      "label": "Collimator",
+      "collection": "SO_Collimator",
+      "library": "library/Bllas_Schematic_Optics_Additions_v04.blend",
+      "optical_plane_position": [
+        -10.064,
+        9.548,
+        1.6
       ],
       "focal_length_mm": null
     },
     {
       "label": "P",
-      "collection": "SO_Figure_Circular_Pupil",
-      "library": "library/Bllas_Schematic_Optics_Additions_v02.blend",
-      "position_xy": [
-        -9.72,
-        9.99
-      ],
-      "experimental_normal_xy_reference": [
-        0.800000011920929,
-        -0.6000000238418579
+      "collection": "SO_Pinhole",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "optical_plane_position": [
+        -8,
+        8,
+        1.6
       ],
       "focal_length_mm": null
     },
@@ -50,13 +55,10 @@
       "label": "L1P",
       "collection": "SO_Biconvex",
       "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        -4.860001,
-        6.345
-      ],
-      "experimental_normal_xy_reference": [
-        0.800000011920929,
-        -0.6000000238418579
+      "optical_plane_position": [
+        -4,
+        5,
+        1.6
       ],
       "focal_length_mm": null
     },
@@ -64,41 +66,10 @@
       "label": "L2P",
       "collection": "SO_Biconvex",
       "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        5.4,
-        -1.35
-      ],
-      "experimental_normal_xy_reference": [
-        0.800000011920929,
-        -0.6000000238418579
-      ],
-      "focal_length_mm": null
-    },
-    {
-      "label": "L2",
-      "collection": "SO_Biconvex",
-      "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        2.7,
-        -5.4
-      ],
-      "experimental_normal_xy_reference": [
-        -1.0,
-        0.0
-      ],
-      "focal_length_mm": null
-    },
-    {
-      "label": "L1",
-      "collection": "SO_Biconvex",
-      "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        -9.45,
-        -5.625
-      ],
-      "experimental_normal_xy_reference": [
-        -1.0,
-        0.0
+      "optical_plane_position": [
+        4,
+        -1,
+        1.6
       ],
       "focal_length_mm": null
     },
@@ -106,27 +77,43 @@
       "label": "SLM",
       "collection": "SO_SLM",
       "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        10.8,
-        -5.4
+      "optical_plane_position": [
+        8,
+        -4,
+        1.6
       ],
-      "experimental_normal_xy_reference": [
-        -0.9486833810806274,
-        0.3162277936935425
+      "focal_length_mm": null
+    },
+    {
+      "label": "L2",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "optical_plane_position": [
+        3,
+        -4,
+        1.6
       ],
       "focal_length_mm": null
     },
     {
       "label": "SF",
-      "collection": "SO_Spatial_Filter_Mask",
-      "library": "library/Bllas_Schematic_Optics_Additions_v02.blend",
-      "position_xy": [
-        -4.05,
-        -5.625
+      "collection": "SO_Iris",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "optical_plane_position": [
+        -2,
+        -4,
+        1.6
       ],
-      "experimental_normal_xy_reference": [
-        -1.0,
-        0.0
+      "focal_length_mm": null
+    },
+    {
+      "label": "L1",
+      "collection": "SO_Biconvex",
+      "library": "library/Bllas_Schematic_Optics_v01.blend",
+      "optical_plane_position": [
+        -7,
+        -4,
+        1.6
       ],
       "focal_length_mm": null
     },
@@ -134,172 +121,41 @@
       "label": "CCD",
       "collection": "SO_CCD_Camera",
       "library": "library/Bllas_Schematic_Optics_v01.blend",
-      "position_xy": [
-        -14.4,
-        -5.625
-      ],
-      "experimental_normal_xy_reference": [
-        1.0,
-        0.0
+      "optical_plane_position": [
+        -12,
+        -4,
+        1.6
       ],
       "focal_length_mm": null
     }
   ],
-  "beams": [
-    {
-      "name": "Input",
-      "points_xy": [
-        [
-          -10.98,
-          10.935
-        ],
-        [
-          -9.72,
-          9.99
-        ],
-        [
-          -4.860001,
-          6.345
-        ]
-      ],
-      "visualization_radii": [
-        0.054,
-        0.054,
-        0.054
-      ],
-      "rejected": false
-    },
-    {
-      "name": "Input relay",
-      "points_xy": [
-        [
-          -4.860001,
-          6.345
-        ],
-        [
-          0.269999,
-          2.4975
-        ],
-        [
-          5.4,
-          -1.35
-        ],
-        [
-          10.8,
-          -5.4
-        ]
-      ],
-      "visualization_radii": [
-        0.054,
-        0.01125,
-        0.054,
-        0.054
-      ],
-      "rejected": false
-    },
-    {
-      "name": "Selected +1",
-      "points_xy": [
-        [
-          10.8,
-          -5.4
-        ],
-        [
-          2.7,
-          -5.4
-        ],
-        [
-          -4.05,
-          -5.625
-        ],
-        [
-          -9.45,
-          -5.625
-        ],
-        [
-          -14.4,
-          -5.625
-        ]
-      ],
-      "visualization_radii": [
-        0.054,
-        0.135,
-        0.009,
-        0.135,
-        0.0675
-      ],
-      "rejected": false
-    },
-    {
-      "name": "Rejected 0",
-      "points_xy": [
-        [
-          10.8,
-          -5.4
-        ],
-        [
-          2.7,
-          -5.29875
-        ],
-        [
-          -4.05,
-          -5.4
-        ]
-      ],
-      "visualization_radii": [
-        0.045,
-        0.09,
-        0.009
-      ],
-      "rejected": true
-    },
-    {
-      "name": "Rejected -1",
-      "points_xy": [
-        [
-          10.8,
-          -5.4
-        ],
-        [
-          2.7,
-          -5.1975
-        ],
-        [
-          -4.05,
-          -5.175
-        ]
-      ],
-      "visualization_radii": [
-        0.045,
-        0.09,
-        0.009
-      ],
-      "rejected": true
-    }
-  ],
-  "reference_images": [
-    {
-      "component": "SLM",
-      "title": "SLM hologram",
-      "file": "examples/paper-setup/reference-images/slm_hologram.png",
-      "placement": "Separate framed panel near SLM; preserve aspect ratio, keep optics and beams visible; no connector lines."
-    },
-    {
-      "component": "CCD",
-      "title": "Recorded intensity",
-      "file": "examples/paper-setup/reference-images/ccd_intensity.png",
-      "placement": "Separate framed panel near CCD; preserve aspect ratio, keep optics and beams visible; no connector lines."
-    }
-  ],
-  "assumptions": [
-    "Physical positions reused from the prior authored reconstruction; sketch provides topology, not metric distances.",
-    "P is circular pupil; assumed diameter 4 mm. SF assumed diameter 1 mm.",
-    "Focal lengths unspecified; generic biconvex lenses are visualization assets.",
-    "Optical height 120 mm and mounting poses are assumptions, not mechanically certified.",
-    "PDF labels retained: L2 near SLM and L1 near CCD; previous notes report conflicting manuscript prose.",
-    "Gaussian envelopes and bright cores are not diffraction simulations or measured beam diameters.",
-    "Schematic positions are a compressed illustrative layout, not physical distances."
-  ],
-  "orientation_note": "Normals were authored for experimental +Y-front inserts. Inspect each collection local front/output axis before deriving rotations; schematic objects have different conventions.",
-  "image_policy": "Include both supplied reference images by default. Pack textures in the Blender file. Do not invent replacement holograms or detector data. See reference-images/README.md for provenance and rights."
+  "input_4f": {
+    "object": "P (pinhole)",
+    "image": "SLM active surface",
+    "focal_distances_BU": [
+      5,
+      5
+    ],
+    "spans_BU": [
+      5,
+      10,
+      5
+    ],
+    "magnification": -1
+  },
+  "return_4f": {
+    "object": "SLM active surface",
+    "image": "CCD sensor",
+    "fourier_filter": "SF (adjustable iris)",
+    "spans_BU": [
+      5,
+      10,
+      5
+    ]
+  },
+  "notes": [
+    "SLM and CCD coordinates identify active planes; their instance origins include housing offsets.",
+    "No physical focal lengths or experimental aperture diameters are assigned.",
+    "Gaussian envelopes are illustrative, not diffraction simulation."
+  ]
 }

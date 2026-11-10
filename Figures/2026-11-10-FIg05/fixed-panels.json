@@ -1,0 +1,42 @@
+[
+  {
+    "image": "CCD intensity",
+    "instrument_anchor_world": [
+      -13.350800514221191,
+      -2.9880001544952393,
+      0.7860000133514404
+    ],
+    "panel_inner_lower_corner_world": [
+      -13.605988502502441,
+      -2.5716350078582764,
+      0.7859969139099121
+    ],
+    "gap_fraction": 0.012,
+    "instrument_silhouette_edge_u": 0.41649287939071655,
+    "visible_horizontal_gap_pixels": 28.799986839294434,
+    "gap_mm_at_86mm": 1.032,
+    "vertical_error_pixels": 0.0,
+    "alignment": "panel lower-right to rear lower-left",
+    "camera_parallel": true
+  },
+  {
+    "image": "SLM hologram",
+    "instrument_anchor_world": [
+      7.490652084350586,
+      -5.6959614753723145,
+      0.3020000457763672
+    ],
+    "panel_inner_lower_corner_world": [
+      7.93178653717041,
+      -6.415702819824219,
+      0.3019961714744568
+    ],
+    "gap_fraction": 0.012,
+    "instrument_silhouette_edge_u": 0.722771942615509,
+    "visible_horizontal_gap_pixels": 28.800058364868164,
+    "gap_mm_at_86mm": 1.032,
+    "vertical_error_pixels": 0.0,
+    "alignment": "panel lower-left to front lower-right",
+    "camera_parallel": true
+  }
+]

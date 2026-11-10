@@ -1,0 +1,44 @@
+[
+  {
+    "id": "view_000",
+    "image": "view_000.png",
+    "preset": "view_000.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 15
+  },
+  {
+    "id": "view_001",
+    "image": "view_001.png",
+    "preset": "view_001.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 25
+  },
+  {
+    "id": "view_002",
+    "image": "view_002.png",
+    "preset": "view_002.json",
+    "azimuth_deg": -105,
+    "elevation_deg": 35
+  },
+  {
+    "id": "view_003",
+    "image": "view_003.png",
+    "preset": "view_003.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 15
+  },
+  {
+    "id": "view_004",
+    "image": "view_004.png",
+    "preset": "view_004.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 25
+  },
+  {
+    "id": "view_005",
+    "image": "view_005.png",
+    "preset": "view_005.json",
+    "azimuth_deg": -75,
+    "elevation_deg": 35
+  }
+]
