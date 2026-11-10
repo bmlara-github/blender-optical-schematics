@@ -12,3 +12,5 @@
 - Keep library lenses generic by shape: biconcave, biconvex, plano-convex, plano-concave and convex-concave (meniscus). Do not create separate library assets for focal lengths. Store focal-length information in scene descriptions and metadata, and use it to inform proportional focal spans in figure layouts; measure folded spans along the beam path. Scene-specific aperture dimensions likewise do not require new library entries.
 
 - Do not add sparse direction arrows to beam paths by default. Use continuous beam geometry; add arrows only when explicitly requested or when a consistent, purposeful annotation scheme is agreed.
+
+- When asked to optimize a schematic POV, follow `docs/camera-view-search.md`. Keep optical geometry fixed, compare and refine camera angles, re-anchor reference panels, exclude clipped or unreadable views, and preserve the original. Judge both empty page area and readability; do not claim a global optimum from a finite search. Save the chosen camera preset and paired SVGs. Close task-opened application windows after saving.

@@ -27,6 +27,7 @@
     }
   ],
   "camera_presets": [
-    "camera-presets/folded-relay-front-left.json"
+    "camera-presets/folded-relay-front-left.json",
+    "camera-presets/folded-relay-compact-oblique.json"
   ]
 }

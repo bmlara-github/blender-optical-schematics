@@ -218,4 +218,32 @@ For an experimental scene, reuse the existing generic laptop. Align its long edg
 
 Export matching lettered and unlettered SVGs at the requested width (86 mm for one column), with explicit millimetre dimensions and 0.5 mm borders when requested. The optical render is embedded raster; lettering is a separate editable vector layer. See \path{docs/propagation-and-camera.md} for details.
 
+
+\clearpage
+\section*{Optional: search for a compact camera view}
+If a schematic contains too much empty space, ask the agent to compare camera viewpoints. Keep an accepted POV unless you want alternatives. The experimental project's accepted viewpoint is independent of this option.
+
+\textbf{Copy this request into Codex:}
+\begin{quote}
+Search for a more compact orthographic POV for this schematic. Keep optical geometry, component instances and focal spans fixed. Preserve the original figure. Compare a coarse grid of azimuths and elevations, then refine promising views. Re-anchor the camera-facing CCD and SLM panels at every angle. Rank complete views by approximate empty page area at 86 mm width, but reject views that obscure optical faces, merge beam branches or leave insufficient room for readable labels. Show a comparison, save the selected camera as a reusable preset, and export lettered and unlettered SVGs with 0.5 mm borders. Close application windows opened for the task when finished.
+\end{quote}
+
+\textbf{How the search works}
+\begin{enumerate}
+\item Save a separate figure directory. Keep component geometry fixed and render transparent previews with consistent camera scale, resolution and lighting. Re-anchor reference panels for every camera angle.
+\item Compare azimuths and elevations. The reusable Blender helper is \path{scripts/search_camera_views.py}; it restores the original camera, object transforms and render settings after the sweep. A panel-update callback must be supplied for scenes with reference panels.
+\item Run the Pillow-based comparison helper outside Blender:
+\begin{Verbatim}[fontsize=\small]
+python scripts/rank_camera_views.py /path/to/candidates
+\end{Verbatim}
+It produces \texttt{comparison.png} and \texttt{ranked.json}. The metrics are cropped page height, alpha-mask occupied fraction and approximate empty page area at the requested publication width. Empty or clipped renders are flagged as invalid.
+\item Inspect readability before selecting a winner. Check iris and SLM faces, component separation, beam branches, image panels and final lettering. Refine the angle grid around promising candidates. A lower numerical score does not override a readability failure.
+\item Apply the chosen camera JSON through \texttt{apply\_camera\_preset}, re-anchor panels, render at final quality and export the paired SVGs. Keep the original figure and preset.
+\end{enumerate}
+
+\textbf{Included compact preset}
+\path{library/camera-presets/folded-relay-compact-oblique.json} stores \textbf{Folded Relay --- Compact Oblique}, with azimuth $-75^\circ$ and elevation $25^\circ$. Azimuth runs from world $+X$ toward $+Y$; elevation is above the $XY$ plane. In the initial 15-view study, this gave a readable $86\times23.47$ mm figure, compared with an earlier height of $80.58$ mm. These values describe that layout, not a universal or proven global optimum.
+
+Alpha coverage is a proxy that depends on the threshold for glass and translucent beams. Keep all four requested borders, preserve render aspect ratio and check the final lettering. The optical render remains raster inside the SVG; text stays editable. Full examples and parameter meanings are in \path{docs/camera-view-search.md}.
+
 \end{document}

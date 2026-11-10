@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "folded-relay-compact-oblique",
+  "name": "Folded Relay \u2014 Compact Oblique",
+  "projection": "ORTHO",
+  "location": [
+    11.074182510375977,
+    -52.52556610107422,
+    26.957096099853516
+  ],
+  "rotation_euler_xyz_radians": [
+    1.134464144706726,
+    1.4627680400280951e-08,
+    0.2617994248867035
+  ],
+  "rotation_quaternion_wxyz": [
+    0.8361760973930359,
+    0.5327029824256897,
+    0.07013169676065445,
+    0.11008468270301819
+  ],
+  "target": [
+    -3.0,
+    0.0,
+    1.600000023841858
+  ],
+  "offset_from_target": [
+    14.074182510375977,
+    -52.52556610107422,
+    25.35709571838379
+  ],
+  "orthographic_scale": 44,
+  "lens_mm": 50.0,
+  "clip_start": 0.10000000149011612,
+  "clip_end": 1000.0,
+  "reference_meters_per_blender_unit": 0.009999999776482582,
+  "resolution": [
+    2600,
+    1600
+  ],
+  "pixel_aspect": [
+    1,
+    1
+  ],
+  "azimuth_deg": -75,
+  "elevation_deg": 25,
+  "description": "Compact oblique view selected from 15 candidates. Preserves visible SLM and iris faces and separates illumination from return relay."
+}

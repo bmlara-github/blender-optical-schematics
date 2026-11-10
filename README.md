@@ -54,3 +54,7 @@ Start with the [step-by-step guide](docs/user-guide.pdf). Keep the [agent folder
 ## Reusable POV and propagation accessories
 
 The **Folded Relay — Front-Left** camera preset and three propagation accessories are included. See [camera and accessory instructions](docs/propagation-and-camera.md) and the updated [user guide](docs/user-guide.pdf). The asset manifest now lists 26 collections.
+
+## Optional camera-view search
+
+Ask the agent to compare camera angles when a schematic contains too much empty space. The [camera-view search workflow](docs/camera-view-search.md) supplies preview rendering, a ranked comparison and readability checks. It preserves the original figure and includes the **Folded Relay — Compact Oblique** preset. See the [user guide](docs/user-guide.pdf) for a copyable request.
