@@ -17,3 +17,7 @@ From this project root run `python3 agent/install.py` on macOS/Linux or `py agen
 Manual equivalent: copy the complete setup-to-blender folder into the project's .agents/skills folder. The final path must be .agents/skills/setup-to-blender/SKILL.md, not a second nested setup-to-blender folder. The dot-prefixed .agents folder may be hidden in your file browser.
 
 If the named call is not recognized, use the direct read-and-run prompt above. The visible agent/ folder remains the distributed source; rerun installation only when updating a local installed copy.
+
+## Current figure layout
+
+Read root `AGENTS.md` and `docs/figure-workflow.md` before generating outputs. They define the current type-folder and `_vXX` conventions and supersede the bundled agent's older root-level output examples.
